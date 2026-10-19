@@ -1,0 +1,542 @@
+[
+  {
+    "query": "Crocin 650",
+    "resolved": {
+      "brand": "Crocin 650",
+      "salts": [
+        "paracetamol"
+      ],
+      "strength": "650 mg",
+      "form": "tablet",
+      "resolved_by": "local_table"
+    },
+    "reference_listing": {
+      "source": "Tata 1mg",
+      "product_name": "Crocin 650mg Tablet",
+      "brand": "Crocin",
+      "salts": [
+        "paracetamol"
+      ],
+      "strength": "650 mg",
+      "form": "tablet",
+      "pack_size_units": 15.0,
+      "price_inr": 32.28,
+      "price_per_unit_inr": 2.15,
+      "in_stock": true,
+      "url": "https://www.1mg.com/drugs/crocin-650mg-tablet-90532",
+      "fetched_at": "2026-10-19T14:00:00Z",
+      "cached": true,
+      "is_reference_brand": true,
+      "match_confidence": 1.0,
+      "flags": []
+    },
+    "results": [
+      {
+        "source": "Tata 1mg",
+        "product_name": "Crocin 650mg Tablet",
+        "brand": "Crocin",
+        "salts": [
+          "paracetamol"
+        ],
+        "strength": "650 mg",
+        "form": "tablet",
+        "pack_size_units": 15.0,
+        "price_inr": 32.28,
+        "price_per_unit_inr": 2.15,
+        "in_stock": true,
+        "url": "https://www.1mg.com/drugs/crocin-650mg-tablet-90532",
+        "fetched_at": "2026-10-19T14:00:00Z",
+        "cached": true,
+        "is_reference_brand": true,
+        "match_confidence": 1.0,
+        "flags": []
+      }
+    ],
+    "savings": {
+      "vs_reference_inr_per_unit": 0.0,
+      "vs_reference_percent": 0.0
+    },
+    "sources": [
+      {
+        "name": "Tata 1mg",
+        "status": "cached",
+        "fetched_at": "2026-10-19T14:00:00Z",
+        "message": null
+      }
+    ],
+    "warnings": [],
+    "disclaimer": "Prices are indicative. Confirm the medicine, strength and availability with your pharmacist or doctor before buying."
+  },
+  {
+    "query": "Dolo 650",
+    "resolved": {
+      "brand": "Crocin 650",
+      "salts": [
+        "paracetamol"
+      ],
+      "strength": "650 mg",
+      "form": "tablet",
+      "resolved_by": "local_table"
+    },
+    "reference_listing": {
+      "source": "Tata 1mg",
+      "product_name": "Crocin 650mg Tablet",
+      "brand": "Crocin",
+      "salts": [
+        "paracetamol"
+      ],
+      "strength": "650 mg",
+      "form": "tablet",
+      "pack_size_units": 15.0,
+      "price_inr": 32.28,
+      "price_per_unit_inr": 2.15,
+      "in_stock": true,
+      "url": "https://www.1mg.com/drugs/crocin-650mg-tablet-90532",
+      "fetched_at": "2026-10-19T15:02:39.796595Z",
+      "cached": false,
+      "is_reference_brand": true,
+      "match_confidence": 1.0,
+      "flags": []
+    },
+    "results": [
+      {
+        "source": "Apollo Pharmacy",
+        "product_name": "Crocin 650 Tablet",
+        "brand": "Crocin",
+        "salts": [
+          "paracetamol"
+        ],
+        "strength": "650 mg",
+        "form": "tablet",
+        "pack_size_units": 15.0,
+        "price_inr": 32.0,
+        "price_per_unit_inr": 2.13,
+        "in_stock": true,
+        "url": "https://www.apollopharmacy.in/otc/crocin-650mg-tablet?srsltid=AU7gw4WgTF5qXput1YX1FxgWuoLfBqrdvd1yEg1iNJPLPjZJnekscYZX",
+        "fetched_at": "2026-10-19T15:02:39.796595Z",
+        "cached": false,
+        "is_reference_brand": true,
+        "match_confidence": 1.0,
+        "flags": []
+      },
+      {
+        "source": "Apollo Pharmacy",
+        "product_name": "Crocin 650 Tablet",
+        "brand": "Crocin",
+        "salts": [
+          "paracetamol"
+        ],
+        "strength": "650 mg",
+        "form": "tablet",
+        "pack_size_units": 15.0,
+        "price_inr": 32.0,
+        "price_per_unit_inr": 2.13,
+        "in_stock": true,
+        "url": "https://www.apollopharmacy.in/hi/otc/crocin-650mg-tablet?srsltid=AU7gw4XRLErUPQeP6JX1_Ql-pL9vNYabwtHjTDBBoXPIEVuhUCJ2q69S",
+        "fetched_at": "2026-10-19T15:02:39.796595Z",
+        "cached": false,
+        "is_reference_brand": true,
+        "match_confidence": 1.0,
+        "flags": []
+      },
+      {
+        "source": "Tata 1mg",
+        "product_name": "Crocin 650mg Tablet",
+        "brand": "Crocin",
+        "salts": [
+          "paracetamol"
+        ],
+        "strength": "650 mg",
+        "form": "tablet",
+        "pack_size_units": 15.0,
+        "price_inr": 32.28,
+        "price_per_unit_inr": 2.15,
+        "in_stock": true,
+        "url": "https://www.1mg.com/drugs/crocin-650mg-tablet-90532",
+        "fetched_at": "2026-10-19T15:02:39.796595Z",
+        "cached": false,
+        "is_reference_brand": true,
+        "match_confidence": 1.0,
+        "flags": []
+      },
+      {
+        "source": "Tata 1mg",
+        "product_name": "Crocin 650 Advance Tablet",
+        "brand": "Crocin",
+        "salts": [
+          "paracetamol"
+        ],
+        "strength": "650 mg",
+        "form": "tablet",
+        "pack_size_units": null,
+        "price_inr": 31.5,
+        "price_per_unit_inr": null,
+        "in_stock": true,
+        "url": "https://www.1mg.com/otc/crocin-650-advance-tablet-otc638914",
+        "fetched_at": "2026-10-19T15:02:39.796595Z",
+        "cached": false,
+        "is_reference_brand": true,
+        "match_confidence": 1.0,
+        "flags": [
+          "pack_size_unclear"
+        ]
+      }
+    ],
+    "savings": {
+      "vs_reference_inr_per_unit": 0.0,
+      "vs_reference_percent": 0.0
+    },
+    "sources": [
+      {
+        "name": "Tata 1mg",
+        "status": "ok",
+        "fetched_at": "2026-10-19T15:02:07.111687Z",
+        "message": null
+      },
+      {
+        "name": "Apollo Pharmacy",
+        "status": "ok",
+        "fetched_at": "2026-10-19T15:02:07.135490Z",
+        "message": null
+      },
+      {
+        "name": "Netmeds",
+        "status": "failed",
+        "fetched_at": "2026-10-19T15:02:07.140600Z",
+        "message": "Fetch error: timeout"
+      }
+    ],
+    "warnings": [],
+    "disclaimer": "Prices are indicative. Confirm the medicine, strength and availability with your pharmacist or doctor before buying."
+  },
+  {
+    "query": "Pan 40",
+    "resolved": {
+      "brand": "Pan 40",
+      "salts": [
+        "pantoprazole"
+      ],
+      "strength": "40 mg",
+      "form": "tablet",
+      "resolved_by": "local_table"
+    },
+    "reference_listing": {
+      "source": "Tata 1mg",
+      "product_name": "PAN 40 Tablet",
+      "brand": "PAN",
+      "salts": [
+        "pantoprazole"
+      ],
+      "strength": "40 mg",
+      "form": "tablet",
+      "pack_size_units": 15.0,
+      "price_inr": 185.0,
+      "price_per_unit_inr": 12.33,
+      "in_stock": true,
+      "url": "https://www.1mg.com/drugs/pan-40-tablet-325250",
+      "fetched_at": "2026-10-19T15:05:38.074438Z",
+      "cached": false,
+      "is_reference_brand": true,
+      "match_confidence": 1.0,
+      "flags": []
+    },
+    "results": [
+      {
+        "source": "Tata 1mg",
+        "product_name": "PAN 40 Tablet",
+        "brand": "PAN",
+        "salts": [
+          "pantoprazole"
+        ],
+        "strength": "40 mg",
+        "form": "tablet",
+        "pack_size_units": 10.0,
+        "price_inr": 71.2,
+        "price_per_unit_inr": 7.12,
+        "in_stock": false,
+        "url": "https://www.1mg.com/drugs/pan-40-tablet-347428",
+        "fetched_at": "2026-10-19T15:05:38.074438Z",
+        "cached": false,
+        "is_reference_brand": true,
+        "match_confidence": 1.0,
+        "flags": []
+      },
+      {
+        "source": "Tata 1mg",
+        "product_name": "PAN 40 Tablet",
+        "brand": "PAN",
+        "salts": [
+          "pantoprazole"
+        ],
+        "strength": "40 mg",
+        "form": "tablet",
+        "pack_size_units": 15.0,
+        "price_inr": 185.0,
+        "price_per_unit_inr": 12.33,
+        "in_stock": true,
+        "url": "https://www.1mg.com/drugs/pan-40-tablet-325250",
+        "fetched_at": "2026-10-19T15:05:38.074438Z",
+        "cached": false,
+        "is_reference_brand": true,
+        "match_confidence": 1.0,
+        "flags": []
+      },
+      {
+        "source": "Apollo Pharmacy",
+        "product_name": "PAN 40 Tablet",
+        "brand": "PAN",
+        "salts": [
+          "pantoprazole"
+        ],
+        "strength": "40 mg",
+        "form": "tablet",
+        "pack_size_units": 15.0,
+        "price_inr": 192.5,
+        "price_per_unit_inr": 12.83,
+        "in_stock": true,
+        "url": "https://www.apollopharmacy.in/medicine/pan-40mg-tablet?srsltid=AU7gw4UyjrNZ5PzG-wDTxNRJxWnJ3AljzYAzIXBUcQqkNuGqWva20mqp",
+        "fetched_at": "2026-10-19T15:05:38.074438Z",
+        "cached": false,
+        "is_reference_brand": true,
+        "match_confidence": 1.0,
+        "flags": []
+      }
+    ],
+    "savings": {
+      "vs_reference_inr_per_unit": 0.0,
+      "vs_reference_percent": 0.0
+    },
+    "sources": [
+      {
+        "name": "Tata 1mg",
+        "status": "ok",
+        "fetched_at": "2026-10-19T15:05:05.434888Z",
+        "message": null
+      },
+      {
+        "name": "Apollo Pharmacy",
+        "status": "ok",
+        "fetched_at": "2026-10-19T15:05:05.440381Z",
+        "message": null
+      },
+      {
+        "name": "Netmeds",
+        "status": "failed",
+        "fetched_at": "2026-10-19T15:05:05.445177Z",
+        "message": "Fetch error: timeout"
+      }
+    ],
+    "warnings": [],
+    "disclaimer": "Prices are indicative. Confirm the medicine, strength and availability with your pharmacist or doctor before buying."
+  },
+  {
+    "query": "Augmentin 625 Duo",
+    "resolved": {
+      "brand": "Augmentin 625 Duo",
+      "salts": [
+        "amoxicillin",
+        "clavulanic acid"
+      ],
+      "strength": "500 mg + 125 mg",
+      "form": "tablet",
+      "resolved_by": "local_table"
+    },
+    "reference_listing": {
+      "source": "Tata 1mg",
+      "product_name": "Augmentin 625 Duo Tablet",
+      "brand": "Augmentin",
+      "salts": [
+        "amoxicillin",
+        "clavulanic acid"
+      ],
+      "strength": "500 mg + 125 mg",
+      "form": "tablet",
+      "pack_size_units": 10.0,
+      "price_inr": 189.0,
+      "price_per_unit_inr": 18.9,
+      "in_stock": true,
+      "url": "https://www.1mg.com/drugs/augmentin-625-duo-tablet-138629",
+      "fetched_at": "2026-10-19T15:07:25.182663Z",
+      "cached": false,
+      "is_reference_brand": true,
+      "match_confidence": 1.0,
+      "flags": []
+    },
+    "results": [
+      {
+        "source": "Tata 1mg",
+        "product_name": "Augmentin 625 Duo Tablet",
+        "brand": "Augmentin",
+        "salts": [
+          "amoxicillin",
+          "clavulanic acid"
+        ],
+        "strength": "500 mg + 125 mg",
+        "form": "tablet",
+        "pack_size_units": 10.0,
+        "price_inr": 189.0,
+        "price_per_unit_inr": 18.9,
+        "in_stock": true,
+        "url": "https://www.1mg.com/drugs/augmentin-625-duo-tablet-138629",
+        "fetched_at": "2026-10-19T15:07:25.182663Z",
+        "cached": false,
+        "is_reference_brand": true,
+        "match_confidence": 1.0,
+        "flags": []
+      },
+      {
+        "source": "Apollo Pharmacy",
+        "product_name": "Augmentin 625 Duo Tablet",
+        "brand": "Augmentin",
+        "salts": [
+          "amoxycillin",
+          "clavulanic acid"
+        ],
+        "strength": "500 mg + 125 mg",
+        "form": "tablet",
+        "pack_size_units": null,
+        "price_inr": 196.5,
+        "price_per_unit_inr": null,
+        "in_stock": true,
+        "url": "https://www.apollopharmacy.in/medicine/augmentin-duo-625mg-tablet?srsltid=AU7gw4Ufmyb5GrdD8pcpjx66nGc3X2JOfNNCSRaL1wrm-KseAvXHaki0",
+        "fetched_at": "2026-10-19T15:07:25.182663Z",
+        "cached": false,
+        "is_reference_brand": true,
+        "match_confidence": 0.4,
+        "flags": [
+          "different_salts",
+          "pack_size_unclear",
+          "low_confidence"
+        ]
+      }
+    ],
+    "savings": {
+      "vs_reference_inr_per_unit": 0.0,
+      "vs_reference_percent": 0.0
+    },
+    "sources": [
+      {
+        "name": "Tata 1mg",
+        "status": "ok",
+        "fetched_at": "2026-10-19T15:06:51.419008Z",
+        "message": null
+      },
+      {
+        "name": "Apollo Pharmacy",
+        "status": "ok",
+        "fetched_at": "2026-10-19T15:06:51.426782Z",
+        "message": null
+      },
+      {
+        "name": "Netmeds",
+        "status": "failed",
+        "fetched_at": "2026-10-19T15:06:51.433456Z",
+        "message": "Fetch error: timeout"
+      }
+    ],
+    "warnings": [],
+    "disclaimer": "Prices are indicative. Confirm the medicine, strength and availability with your pharmacist or doctor before buying."
+  },
+  {
+    "query": "Allegra 120",
+    "resolved": {
+      "brand": "Allegra 120",
+      "salts": [
+        "fexofenadine"
+      ],
+      "strength": "120 mg",
+      "form": "tablet",
+      "resolved_by": "local_table"
+    },
+    "reference_listing": {
+      "source": "Tata 1mg",
+      "product_name": "Allegra 120mg Tablet",
+      "brand": "Allegra",
+      "salts": [
+        "fexofenadine"
+      ],
+      "strength": "120 mg",
+      "form": "tablet",
+      "pack_size_units": 10.0,
+      "price_inr": 262.0,
+      "price_per_unit_inr": 26.2,
+      "in_stock": true,
+      "url": "https://www.1mg.com/drugs/allegra-120mg-tablet-68763",
+      "fetched_at": "2026-10-19T15:08:18.614730Z",
+      "cached": false,
+      "is_reference_brand": true,
+      "match_confidence": 1.0,
+      "flags": []
+    },
+    "results": [
+      {
+        "source": "Tata 1mg",
+        "product_name": "Allegra 120mg Tablet",
+        "brand": "Allegra",
+        "salts": [
+          "fexofenadine"
+        ],
+        "strength": "120 mg",
+        "form": "tablet",
+        "pack_size_units": 10.0,
+        "price_inr": 262.0,
+        "price_per_unit_inr": 26.2,
+        "in_stock": true,
+        "url": "https://www.1mg.com/drugs/allegra-120mg-tablet-68763",
+        "fetched_at": "2026-10-19T15:08:18.614730Z",
+        "cached": false,
+        "is_reference_brand": true,
+        "match_confidence": 1.0,
+        "flags": []
+      },
+      {
+        "source": "Apollo Pharmacy",
+        "product_name": "Allegra 120 mg Tablet",
+        "brand": "Allegra",
+        "salts": [
+          "fexofenadine"
+        ],
+        "strength": "120 mg",
+        "form": "tablet",
+        "pack_size_units": null,
+        "price_inr": 272.5,
+        "price_per_unit_inr": null,
+        "in_stock": true,
+        "url": "https://www.apollopharmacy.in/medicine/allegra-120mg-tablet?srsltid=AU7gw4XYnILYg8RGhx_BhGHtpYP_yHc-blXGbeLDhefdaByd4POlBC-e",
+        "fetched_at": "2026-10-19T15:08:18.614730Z",
+        "cached": false,
+        "is_reference_brand": true,
+        "match_confidence": 1.0,
+        "flags": [
+          "pack_size_unclear"
+        ]
+      }
+    ],
+    "savings": {
+      "vs_reference_inr_per_unit": 0.0,
+      "vs_reference_percent": 0.0
+    },
+    "sources": [
+      {
+        "name": "Tata 1mg",
+        "status": "ok",
+        "fetched_at": "2026-10-19T15:07:45.773226Z",
+        "message": null
+      },
+      {
+        "name": "Apollo Pharmacy",
+        "status": "ok",
+        "fetched_at": "2026-10-19T15:07:45.781430Z",
+        "message": null
+      },
+      {
+        "name": "Netmeds",
+        "status": "failed",
+        "fetched_at": "2026-10-19T15:07:45.787851Z",
+        "message": "Fetch error: timeout"
+      }
+    ],
+    "warnings": [],
+    "disclaimer": "Prices are indicative. Confirm the medicine, strength and availability with your pharmacist or doctor before buying."
+  }
+]
