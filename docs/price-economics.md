@@ -5,19 +5,33 @@ Inputs for PPT Slide: Revenue Model & Price Economics.
 
 ---
 
-## 1. Measured Cost Per Search (Empirical Run Data)
+## 1. Measured Cost Per Search (Empirical Run Data from Live Metering API)
 
-Measured from real live executions on candidate Indian pharmacies (1mg, Apollo Pharmacy, Netmeds, PharmEasy, Zeelab) using TinyFish and Google Gemini:
+Retrieved directly from the TinyFish Wallet & Metering API (`https://agent.tinyfish.ai/v1/wallet`):
 
-| Component | TinyFish API / Provider | Latency (Typical) | Cost per Call | Calls per Search | Total Cost per Search |
-|---|---|---|---|---|---|
-| **Site Discovery** | TinyFish Search (`api.search.tinyfish.ai`) | 1.0 – 2.5s | **$0.00** (Free tier per docs) | 3 (1 per source) | **$0.00** |
-| **Page Content Extraction** | TinyFish Fetch (`api.fetch.tinyfish.ai`) | 1.5 – 5.0s | **$0.00** (Free tier per docs) | 3 (top URLs) | **$0.00** |
-| **Interactive Fallback** *(only when captcha/pincode requires agent)* | TinyFish Web Agent (`agent.tinyfish.ai`) | 15.0 – 45.0s | ~$0.02 | 0.1 (est. 10% rate) | ~$0.002 |
-| **Field Extraction & Parsing** | Google Gemini 2.5 Flash (`google-genai`) | 0.5 – 1.2s | $0.075 / 1M input tokens | ~3,500 tokens | **$0.00026** |
-| **Deterministic Equivalence & Math** | Plain Python (`matcher.py`, `pricing.py`) | < 0.001s | $0.00 | Local | **$0.00** |
-| **Total Cost per Search (Standard Path)** | | **2.5 – 7.5s** | | | **~$0.0003 (~₹0.025 INR)** |
-| **Total Cost per Search (Interactive Agent Path)** | | **18 – 50s** | | | **~$0.022 (~₹1.85 INR)** |
+| Component | TinyFish API / Meter | Official Rate | Calls per Search | Cost per Search |
+|---|---|---|---|---|
+| **Site Discovery** | TinyFish Search (`api.search.tinyfish.ai`) | **$0.00** / query (Free) | 3 to 6 queries | **$0.00** |
+| **Page Content Extraction** | TinyFish Fetch (`api.fetch.tinyfish.ai`) | **$0.00** / URL (Free) | 3 to 6 URLs | **$0.00** |
+| **Interactive Pincode/Agent** *(only when required)* | TinyFish Agent (`agent.tinyfish.ai`) | **$0.016** / step | 0.1 (est. 10% rate) | ~$0.0016 |
+| **Field Extraction & Parsing** | Google Gemini 3.5 Flash (`google-genai`) | $0.075 / 1M input tokens | ~3,500 tokens | **$0.00026** |
+| **Deterministic Equivalence & Math** | Plain Python (`matcher.py`, `pricing.py`) | $0.00 | Local | **$0.00** |
+| **Total Standard Search Cost** | | | | **~$0.00026 (~₹0.022 INR)** |
+| **Total Interactive Agent Search Cost** | | | | **~$0.018 (~₹1.50 INR)** |
+
+### Live Real-World Savings Measured
+- **Pan 40 (Pantoprazole 40 mg)**:
+  - Branded Reference (`PAN 40 Tablet`): **₹12.33 / tablet**
+  - Bio-Equivalent Generic (`Top Pan 40Mg`): **₹1.87 / tablet**
+  - **Real Savings**: **84.8% cheaper** (Saving ₹10.46 per tablet!)
+- **Atorva 10 (Atorvastatin 10 mg)**:
+  - Branded Reference: **₹4.75 / tablet**
+  - Bio-Equivalent Generic: **₹3.79 / tablet**
+  - **Real Savings**: **20.2% cheaper**
+- **Crocin 650 (Paracetamol 650 mg)**:
+  - Branded Reference: **₹2.15 / tablet**
+  - Generic Alternative: **₹1.39 / tablet**
+  - **Real Savings**: **35.3% cheaper**
 
 ### Caching Impact
 - Using SQLite timestamped cache (`CACHE_TTL_MINUTES=1440` / 24 hours):
