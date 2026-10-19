@@ -1,0 +1,39 @@
+# Pharmacy Sources Configuration for Dawa Dost
+# Candidate sources to be evaluated via feasibility testing
+
+sources:
+  - name: "Tata 1mg"
+    base_url: "https://www.1mg.com"
+    strategy: "fetch"
+    enabled: true
+    search_url_template: "https://www.1mg.com/search/all?name={query}"
+
+  - name: "Apollo Pharmacy"
+    base_url: "https://www.apollopharmacy.in"
+    strategy: "fetch"
+    enabled: true
+    search_url_template: "https://www.apollopharmacy.in/search-medicines/{query}"
+
+  - name: "Netmeds"
+    base_url: "https://www.netmeds.com"
+    strategy: "fetch"
+    enabled: true
+    search_url_template: "https://www.netmeds.com/catalogsearch/result/{query}/all"
+
+  - name: "PharmEasy"
+    base_url: "https://pharmeasy.in"
+    strategy: "fetch"
+    enabled: false
+    search_url_template: "https://pharmeasy.in/search/all?name={query}"
+
+  - name: "Truemeds"
+    base_url: "https://www.truemeds.com"
+    strategy: "fetch"
+    enabled: false
+    search_url_template: "https://www.truemeds.com/search/{query}"
+
+  - name: "Zeelab Pharmacy"
+    base_url: "https://zeelabpharmacy.com"
+    strategy: "fetch"
+    enabled: false
+    search_url_template: "https://zeelabpharmacy.com/search?search={query}"

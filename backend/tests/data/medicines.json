@@ -1,0 +1,142 @@
+[
+  {
+    "brand": "Crocin 650",
+    "salts": ["paracetamol"],
+    "strength": "650 mg",
+    "form": "tablet",
+    "known_equivalents": ["Dolo 650", "Calpol 650", "Pacimol 650", "P-650"]
+  },
+  {
+    "brand": "Dolo 650",
+    "salts": ["paracetamol"],
+    "strength": "650 mg",
+    "form": "tablet",
+    "known_equivalents": ["Crocin 650", "Calpol 650", "Pacimol 650", "P-650"]
+  },
+  {
+    "brand": "Calpol 500",
+    "salts": ["paracetamol"],
+    "strength": "500 mg",
+    "form": "tablet",
+    "known_equivalents": ["Crocin 500", "Pacimol 500", "Pyrigesic 500"]
+  },
+  {
+    "brand": "Augmentin 625 Duo",
+    "salts": ["amoxicillin", "clavulanic acid"],
+    "strength": "500 mg + 125 mg",
+    "form": "tablet",
+    "known_equivalents": ["Moxikind-CV 625", "Clavam 625", "Sensiclav 625"]
+  },
+  {
+    "brand": "Pan 40",
+    "salts": ["pantoprazole"],
+    "strength": "40 mg",
+    "form": "tablet",
+    "known_equivalents": ["Pantocid 40", "Pantodac 40", "Pantop 40"]
+  },
+  {
+    "brand": "Pantocid 40",
+    "salts": ["pantoprazole"],
+    "strength": "40 mg",
+    "form": "tablet",
+    "known_equivalents": ["Pan 40", "Pantodac 40", "Pantop 40"]
+  },
+  {
+    "brand": "Omez 20",
+    "salts": ["omeprazole"],
+    "strength": "20 mg",
+    "form": "capsule",
+    "known_equivalents": ["Omecip 20", "Ocid 20", "Omee 20"]
+  },
+  {
+    "brand": "Allegra 120",
+    "salts": ["fexofenadine"],
+    "strength": "120 mg",
+    "form": "tablet",
+    "known_equivalents": ["Fexova 120", "Histafree 120", "Altifex 120"]
+  },
+  {
+    "brand": "Cetzine 10",
+    "salts": ["cetirizine"],
+    "strength": "10 mg",
+    "form": "tablet",
+    "known_equivalents": ["Alerid 10", "Okacet 10", "Zyrtec 10"]
+  },
+  {
+    "brand": "Montair LC",
+    "salts": ["montelukast", "levocetirizine"],
+    "strength": "10 mg + 5 mg",
+    "form": "tablet",
+    "known_equivalents": ["Telekast-L", "Montek-LC", "Levocet M"]
+  },
+  {
+    "brand": "Glycomet 500",
+    "salts": ["metformin"],
+    "strength": "500 mg",
+    "form": "tablet",
+    "known_equivalents": ["Cetapin 500", "Metfor 500", "Bigomet 500"]
+  },
+  {
+    "brand": "Telma 40",
+    "salts": ["telmisartan"],
+    "strength": "40 mg",
+    "form": "tablet",
+    "known_equivalents": ["Telmikind 40", "Telpres 40", "Arbitel 40"]
+  },
+  {
+    "brand": "Amlong 5",
+    "salts": ["amlodipine"],
+    "strength": "5 mg",
+    "form": "tablet",
+    "known_equivalents": ["Stamlo 5", "Amlopin 5", "Amtas 5"]
+  },
+  {
+    "brand": "Atorva 10",
+    "salts": ["atorvastatin"],
+    "strength": "10 mg",
+    "form": "tablet",
+    "known_equivalents": ["Storvas 10", "Atocor 10", "Lipikind 10"]
+  },
+  {
+    "brand": "Shelcal 500",
+    "salts": ["calcium", "vitamin d3"],
+    "strength": "500 mg + 250 iu",
+    "form": "tablet",
+    "known_equivalents": ["Gemcal", "Cipcal 500", "Calshine"]
+  },
+  {
+    "brand": "Becosules",
+    "salts": ["vitamin b complex", "vitamin c"],
+    "strength": "standard",
+    "form": "capsule",
+    "known_equivalents": ["Cobadex Forte", "Surbex XT", "Polyvit"]
+  },
+  {
+    "brand": "Azithral 500",
+    "salts": ["azithromycin"],
+    "strength": "500 mg",
+    "form": "tablet",
+    "known_equivalents": ["Azee 500", "Zady 500", "Zithrox 500"]
+  },
+  {
+    "brand": "Meftal Spas",
+    "salts": ["mefenamic acid", "dicyclomine"],
+    "strength": "250 mg + 10 mg",
+    "form": "tablet",
+    "known_equivalents": ["Spasmonil", "Colimex", "Spasmo-Proxyvon"]
+  },
+  {
+    "brand": "Combiflam",
+    "salts": ["ibuprofen", "paracetamol"],
+    "strength": "400 mg + 325 mg",
+    "form": "tablet",
+    "known_equivalents": ["Ibugesic Plus", "Flexon", "Brufen Plus"]
+  },
+  {
+    "brand": "Gelusil",
+    "salts": ["aluminium hydroxide", "magnesium hydroxide", "simethicone"],
+    "strength": "standard",
+    "form": "tablet",
+    "known_equivalents": ["Digene", "Mucaine", "Polycrol"]
+  }
+]
