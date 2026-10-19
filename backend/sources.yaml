@@ -1,39 +1,43 @@
 # Pharmacy Sources Configuration for Dawa Dost
-# Candidate sources to be evaluated via feasibility testing
+# Verified via TinyFish feasibility testing on live pharmacy sites
 
 sources:
   - name: "Tata 1mg"
+    domain: "1mg.com"
     base_url: "https://www.1mg.com"
     strategy: "fetch"
     enabled: true
+    stealth_needed: false
     search_url_template: "https://www.1mg.com/search/all?name={query}"
 
   - name: "Apollo Pharmacy"
+    domain: "apollopharmacy.in"
     base_url: "https://www.apollopharmacy.in"
     strategy: "fetch"
     enabled: true
+    stealth_needed: false
     search_url_template: "https://www.apollopharmacy.in/search-medicines/{query}"
 
   - name: "Netmeds"
+    domain: "netmeds.com"
     base_url: "https://www.netmeds.com"
     strategy: "fetch"
     enabled: true
+    stealth_needed: false
     search_url_template: "https://www.netmeds.com/catalogsearch/result/{query}/all"
 
-  - name: "PharmEasy"
-    base_url: "https://pharmeasy.in"
-    strategy: "fetch"
-    enabled: false
-    search_url_template: "https://pharmeasy.in/search/all?name={query}"
-
-  - name: "Truemeds"
-    base_url: "https://www.truemeds.com"
-    strategy: "fetch"
-    enabled: false
-    search_url_template: "https://www.truemeds.com/search/{query}"
-
   - name: "Zeelab Pharmacy"
+    domain: "zeelabpharmacy.com"
     base_url: "https://zeelabpharmacy.com"
     strategy: "fetch"
     enabled: false
+    stealth_needed: false
     search_url_template: "https://zeelabpharmacy.com/search?search={query}"
+
+  - name: "PharmEasy"
+    domain: "pharmeasy.in"
+    base_url: "https://pharmeasy.in"
+    strategy: "fetch"
+    enabled: false
+    stealth_needed: false
+    search_url_template: "https://pharmeasy.in/search/all?name={query}"

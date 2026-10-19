@@ -180,7 +180,7 @@ async def main():
     print("=" * 60)
     working_sources = []
     for r in reports:
-        status_symbol = "✅" if r["working"] else "❌"
+        status_symbol = "[OK]" if r["working"] else "[FAIL]"
         print(f"{status_symbol} {r['name']} ({r['domain']}): working={r['working']}, strategy={r['strategy']}, stealth={r['stealth_needed']}")
         print(f"   Notes: {r['notes']}\n")
         if r["working"]:

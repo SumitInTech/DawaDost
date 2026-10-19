@@ -1,0 +1,67 @@
+[
+  {
+    "name": "Tata 1mg",
+    "domain": "1mg.com",
+    "search_status": "ok",
+    "fetch_status": "ok",
+    "stealth_needed": false,
+    "working": true,
+    "strategy": "fetch",
+    "notes": "Direct fetch succeeded (5748 chars extracted)",
+    "sample_url": "https://www.1mg.com/drugs/crocin-650mg-tablet-90532"
+  },
+  {
+    "name": "Apollo Pharmacy",
+    "domain": "apollopharmacy.in",
+    "search_status": "ok",
+    "fetch_status": "ok",
+    "stealth_needed": false,
+    "working": true,
+    "strategy": "fetch",
+    "notes": "Direct fetch succeeded (33560 chars extracted)",
+    "sample_url": "https://www.apollopharmacy.in/otc/crocin-650mg-tablet?srsltid=AU7gw4V_Nzo1V8u67SzdMs5ZnVCb2PiwKlgxrKVHmdhuFXAKS4aKp6qj"
+  },
+  {
+    "name": "Netmeds",
+    "domain": "netmeds.com",
+    "search_status": "ok",
+    "fetch_status": "ok",
+    "stealth_needed": false,
+    "working": true,
+    "strategy": "fetch",
+    "notes": "Direct fetch succeeded (11886 chars extracted)",
+    "sample_url": "https://www.netmeds.com/product/crocin-650mg-tablet-15s-lui5um-8314015?srsltid=AU7gw4WhUTpL_-gtpGVpJDA-ao_D6O4HbaFKEBfpCY_k4zAkCtJWZfYR"
+  },
+  {
+    "name": "PharmEasy",
+    "domain": "pharmeasy.in",
+    "search_status": "ok",
+    "fetch_status": "ok",
+    "stealth_needed": false,
+    "working": true,
+    "strategy": "fetch",
+    "notes": "Direct fetch succeeded (2744 chars extracted)",
+    "sample_url": "https://pharmeasy.in/health-care/products/crocin-650-tablet-15-no-s-3626228"
+  },
+  {
+    "name": "Truemeds",
+    "domain": "truemeds.com",
+    "search_status": "no_results",
+    "fetch_status": "pending",
+    "stealth_needed": false,
+    "working": false,
+    "strategy": "fetch",
+    "notes": "Search returned 0 results"
+  },
+  {
+    "name": "Zeelab Pharmacy",
+    "domain": "zeelabpharmacy.com",
+    "search_status": "ok",
+    "fetch_status": "ok",
+    "stealth_needed": false,
+    "working": true,
+    "strategy": "fetch",
+    "notes": "Direct fetch succeeded (14452 chars extracted)",
+    "sample_url": "https://zeelabpharmacy.com/product/parazex-xt-650-mg-tab?srsltid=AU7gw4V7Sl439dThybV3OIcw7ki7FyqV0jtPmU1jO_Qx4MsiCwJZBf7m"
+  }
+]
