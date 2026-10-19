@@ -30,12 +30,12 @@ TEST_MEDICINES = [
 ]
 
 
-async def verify_medicine(query: str) -> dict:
+async def verify_medicine(query: str, pincode: str = "110006") -> dict:
     print(f"\n{'='*70}")
-    print(f"SEARCHING LIVE FOR: '{query}'")
+    print(f"SEARCHING LIVE FOR: '{query}' (Pincode: {pincode})")
     print(f"{'='*70}")
 
-    req = SearchRequest(query=query)
+    req = SearchRequest(query=query, pincode=pincode)
     response = await search_medicines(req)
     res_dict = response.model_dump(mode="json")
 

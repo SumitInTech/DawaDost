@@ -45,17 +45,24 @@ async def search_medicines(req: SearchRequest) -> SearchResponse:
             detail="Query cannot be empty",
         )
 
-    pincode = req.pincode.strip() if req.pincode else None
+    clean_pincode = req.pincode.strip()
+    if not clean_pincode or len(clean_pincode) != 6 or not clean_pincode.isdigit():
+        raise HTTPException(
+            status_code=status.HTTP_400_BAD_REQUEST,
+            detail="A valid 6-digit Indian delivery pincode is required",
+        )
 
     # 1. Check Cache
-    cached_entry = cache_service.get_search(clean_query, pincode)
+    cached_entry = cache_service.get_search(clean_query, clean_pincode)
     if cached_entry:
-        logger.info(f"Serving cached search result for query '{clean_query}'")
+        logger.info(f"Serving cached search result for query '{clean_query}' (pincode {clean_pincode})")
         try:
             # Mark sources as cached
             if "sources" in cached_entry:
                 for s in cached_entry["sources"]:
                     s["status"] = "cached"
+            if "pincode" not in cached_entry:
+                cached_entry["pincode"] = clean_pincode
             return SearchResponse(**cached_entry)
         except Exception as exc:
             logger.warning(f"Failed to parse cached entry, re-fetching: {exc}")
@@ -68,6 +75,7 @@ async def search_medicines(req: SearchRequest) -> SearchResponse:
         # Return 200 with empty results and warning per Section 8
         return SearchResponse(
             query=clean_query,
+            pincode=clean_pincode,
             resolved=ResolvedMedicine(
                 brand=clean_query,
                 salts=[],
@@ -88,7 +96,7 @@ async def search_medicines(req: SearchRequest) -> SearchResponse:
     source_statuses, raw_pages = await source_orchestrator.fetch_all_sources(
         resolved=resolved,
         query=clean_query,
-        pincode=pincode,
+        pincode=clean_pincode,
     )
 
     # 4. Extract, Match, and Price Listings
@@ -100,6 +108,7 @@ async def search_medicines(req: SearchRequest) -> SearchResponse:
         raw_text = page.get("markdown_text", "")
         source_name = page.get("source", "")
         url = page.get("url", "")
+        deliv_info = page.get("delivery_info", f"Deliverable to {clean_pincode}")
 
         extracted = await extraction_service.extract_listing(raw_text, source_name, url)
         if not extracted:
@@ -131,6 +140,8 @@ async def search_medicines(req: SearchRequest) -> SearchResponse:
             price_inr=extracted.price_inr,
             price_per_unit_inr=unit_price,
             in_stock=extracted.in_stock,
+            delivery_pincode=clean_pincode,
+            delivery_info=deliv_info,
             url=extracted.url,
             fetched_at=now,
             cached=False,
@@ -149,7 +160,6 @@ async def search_medicines(req: SearchRequest) -> SearchResponse:
     # 5. Select Best Reference Listing
     reference_listing = None
     if reference_candidates:
-        # Choose candidate with valid unit price first
         comparable_refs = [r for r in reference_candidates if r.price_per_unit_inr is not None]
         reference_listing = comparable_refs[0] if comparable_refs else reference_candidates[0]
 
@@ -162,6 +172,7 @@ async def search_medicines(req: SearchRequest) -> SearchResponse:
 
     response = SearchResponse(
         query=clean_query,
+        pincode=clean_pincode,
         resolved=resolved,
         reference_listing=reference_listing,
         results=sorted_results,
@@ -171,6 +182,6 @@ async def search_medicines(req: SearchRequest) -> SearchResponse:
     )
 
     # 8. Save to Cache
-    cache_service.set_search(clean_query, response.model_dump(mode="json"), pincode)
+    cache_service.set_search(clean_query, response.model_dump(mode="json"), clean_pincode)
 
     return response

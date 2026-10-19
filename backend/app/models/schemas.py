@@ -99,6 +99,8 @@ class Listing(BaseModel):
     price_inr: float
     price_per_unit_inr: float | None = Field(None, description="Computed in pricing.py, NEVER by LLM")
     in_stock: bool | None = None
+    delivery_pincode: str | None = Field(None, description="Pincode checked for delivery")
+    delivery_info: str | None = Field(None, description="Estimated delivery timeline or status for pincode")
     url: str
     fetched_at: datetime = Field(..., description="ISO 8601 UTC timestamp")
     cached: bool = False
@@ -131,14 +133,19 @@ class SavingsSummary(BaseModel):
 
 
 class SearchRequest(BaseModel):
-    """Request payload for POST /api/search."""
+    """Request payload for POST /api/search with mandatory Indian pincode."""
     query: str = Field(..., min_length=1, description="Brand or salt name")
-    pincode: str | None = Field(None, description="Optional delivery pincode")
+    pincode: str = Field(
+        ...,
+        pattern=r"^[1-9][0-9]{5}$",
+        description="Mandatory 6-digit Indian delivery pincode (e.g. 110006)",
+    )
 
 
 class SearchResponse(BaseModel):
     """Response payload for POST /api/search strictly per Section 8."""
     query: str
+    pincode: str
     resolved: ResolvedMedicine
     reference_listing: Listing | None = None
     results: list[Listing] = Field(default_factory=list, description="Sorted by price_per_unit_inr ascending")

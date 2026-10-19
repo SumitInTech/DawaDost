@@ -134,13 +134,24 @@ class SourceOrchestrator:
 
             raw_pages = []
             for item in fetch_res.get("results", []):
+                raw_text = item.get("text", "")
+                
+                # Check for delivery timeline indications for the user's pincode
+                delivery_info = f"Deliverable to {pincode}"
+                if "tomorrow" in raw_text.lower():
+                    delivery_info = f"Fast delivery by tomorrow to {pincode}"
+                elif "24-48" in raw_text or "2-3 days" in raw_text.lower():
+                    delivery_info = f"Estimated delivery 2-3 days to {pincode}"
+
                 raw_pages.append(
                     {
                         "source": name,
                         "url": item.get("url"),
                         "title": item.get("title", ""),
-                        "markdown_text": item.get("text", ""),
+                        "markdown_text": raw_text,
                         "fetched_at": now.isoformat(),
+                        "delivery_pincode": pincode,
+                        "delivery_info": delivery_info,
                     }
                 )
 

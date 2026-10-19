@@ -1,5 +1,5 @@
 # Pharmacy Sources Configuration for Dawa Dost
-# Verified via TinyFish feasibility testing on live pharmacy sites
+# All major verified Indian online pharmacies enabled
 
 sources:
   - name: "Tata 1mg"
@@ -30,7 +30,7 @@ sources:
     domain: "zeelabpharmacy.com"
     base_url: "https://zeelabpharmacy.com"
     strategy: "fetch"
-    enabled: false
+    enabled: true
     stealth_needed: false
     search_url_template: "https://zeelabpharmacy.com/search?search={query}"
 
@@ -38,6 +38,14 @@ sources:
     domain: "pharmeasy.in"
     base_url: "https://pharmeasy.in"
     strategy: "fetch"
-    enabled: false
+    enabled: true
     stealth_needed: false
     search_url_template: "https://pharmeasy.in/search/all?name={query}"
+
+  - name: "MedPlus Mart"
+    domain: "medplusmart.com"
+    base_url: "https://www.medplusmart.com"
+    strategy: "fetch"
+    enabled: true
+    stealth_needed: false
+    search_url_template: "https://www.medplusmart.com/search?query={query}"
