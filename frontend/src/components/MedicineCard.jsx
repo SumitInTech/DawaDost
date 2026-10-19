@@ -16,7 +16,7 @@ function formatFreshness(isoString, isCached) {
   }
 }
 
-export default function MedicineCard({ item }) {
+export default function MedicineCard({ item = {}, referenceListing }) {
   const [detailsOpen, setDetailsOpen] = useState(false);
 
   const {
@@ -41,14 +41,29 @@ export default function MedicineCard({ item }) {
   } = item;
 
   const freshnessText = formatFreshness(fetched_at, cached);
-
-  // Unit denominator (per tablet, per capsule, per unit)
   const unitLabel = form ? form.toLowerCase() : 'unit';
-
-  // Pharmacy initial for emblem
   const pharmacyInitial = source ? source.charAt(0).toUpperCase() : 'P';
 
-  const hasSavings = savings_vs_ref_unit !== null && savings_vs_ref_unit !== undefined && savings_vs_ref_unit > 0;
+  // Compute savings against reference listing if not explicitly provided
+  const computedSavings = savings_vs_ref_unit !== undefined && savings_vs_ref_unit !== null
+    ? savings_vs_ref_unit
+    : (referenceListing?.price_per_unit_inr != null && price_per_unit_inr != null
+        ? Math.max(0, +(referenceListing.price_per_unit_inr - price_per_unit_inr).toFixed(2))
+        : 0);
+
+  const hasSavings = computedSavings > 0;
+
+  // Format salts string
+  const saltsDisplay = Array.isArray(salts)
+    ? salts.map((s) => s.charAt(0).toUpperCase() + s.slice(1)).join(' + ')
+    : (salts || 'Standard active formulation');
+
+  // Format match confidence
+  const confDisplay = typeof match_confidence === 'number'
+    ? (match_confidence >= 0.8 ? 'High' : match_confidence >= 0.5 ? 'Review' : 'Low')
+    : (match_confidence ? String(match_confidence).charAt(0).toUpperCase() + String(match_confidence).slice(1) : 'High');
+
+  const cardId = item.id || `res-${source}-${product_name}-${price_inr}`;
 
   return (
     <article
@@ -136,7 +151,7 @@ export default function MedicineCard({ item }) {
           <div className="card-savings-pill">
             <Sparkles size={13} aria-hidden="true" />
             <span>
-              ₹{Number(savings_vs_ref_unit).toFixed(2)} less / {unitLabel} than reference
+              ₹{Number(computedSavings).toFixed(2)} less / {unitLabel} than reference
             </span>
           </div>
         )}
@@ -173,7 +188,7 @@ export default function MedicineCard({ item }) {
           onClick={() => setDetailsOpen(!detailsOpen)}
           className="btn btn-secondary btn-card-details"
           aria-expanded={detailsOpen}
-          aria-controls={`details-${item.id}`}
+          aria-controls={`details-${cardId}`}
         >
           <span>{detailsOpen ? 'Hide formulation details' : 'View details'}</span>
           {detailsOpen ? <ChevronUp size={14} aria-hidden="true" /> : <ChevronDown size={14} aria-hidden="true" />}
@@ -182,11 +197,11 @@ export default function MedicineCard({ item }) {
 
       {/* SECTION G: CARD DETAILS EXPANSION */}
       {detailsOpen && (
-        <div className="card-expanded-details" id={`details-${item.id}`}>
+        <div className="card-expanded-details" id={`details-${cardId}`}>
           <div className="details-grid">
             <div className="detail-item">
               <span className="detail-term">Active Salt:</span>
-              <span className="detail-val font-medium">{salts || 'Standard active formulation'}</span>
+              <span className="detail-val font-medium">{saltsDisplay}</span>
             </div>
 
             <div className="detail-item">
@@ -201,7 +216,7 @@ export default function MedicineCard({ item }) {
 
             <div className="detail-item">
               <span className="detail-term">Match Evaluation:</span>
-              <span className="detail-val capitalize">{match_confidence} confidence bio-equivalence</span>
+              <span className="detail-val capitalize">{confDisplay} confidence bio-equivalence</span>
             </div>
 
             <div className="detail-item">

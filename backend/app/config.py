@@ -12,7 +12,7 @@ class Settings(BaseSettings):
     LLM_API_KEY: str = ""
     CACHE_DB_PATH: str = str(BASE_DIR / "cache.db")
     CACHE_TTL_MINUTES: int = 1440
-    ALLOWED_ORIGINS: str = "http://localhost:5173,http://127.0.0.1:5173"
+    ALLOWED_ORIGINS: str = "http://localhost:5173,http://127.0.0.1:5173,http://localhost:5174,http://127.0.0.1:5174,http://localhost:3000"
     USE_CACHE_ONLY: bool = False
 
     model_config = SettingsConfigDict(

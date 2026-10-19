@@ -23,7 +23,11 @@ class CacheService:
     """Thread-safe SQLite caching service."""
 
     def __init__(self, db_path: str | Path | None = None, ttl_minutes: int | None = None):
-        self.db_path = Path(db_path or settings.CACHE_DB_PATH)
+        p = Path(db_path or settings.CACHE_DB_PATH)
+        if not p.is_absolute():
+            backend_dir = Path(__file__).resolve().parent.parent.parent
+            p = backend_dir / p.name
+        self.db_path = p
         self.ttl_minutes = ttl_minutes if ttl_minutes is not None else settings.CACHE_TTL_MINUTES
         self.db_path.parent.mkdir(parents=True, exist_ok=True)
         self._init_db()

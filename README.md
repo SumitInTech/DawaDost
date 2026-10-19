@@ -40,20 +40,27 @@ All TinyFish integration is centralized in [`backend/app/services/tinyfish_clien
 
 ---
 
-## 🛠️ Unified Architecture
+## 🛠️ Unified Monorepo Architecture
 
 ```
-React UI (Vite)  ──>  FastAPI Backend  ──>  TinyFish (Search / Fetch / Agent)  ──>  Pharmacy Sites
-                            │                                                              │
-                            │<── Clean page markdown / Structured output ──────────────────┘
-                            ▼
-             Google Gemini 3.5 Flash Extraction (Raw text -> ExtractedListing)
-                            ▼
-             Deterministic Python Engine (Salt + Strength + Form) & Unit Price Math
-                            ▼
-             Ranked Results (+ Savings, Confidence, Fetched-at, Pincode ETA)  ──>  React UI
-                            ▲
-             SQLite Cache (Timestamped, TTL, USE_CACHE_ONLY demo fail-safe)
+DawaDost/
+├── frontend/                 # React 19 + Vite Web Application
+│   ├── src/                  # Components, Pages, State, Styles
+│   ├── src/api/client.js     # Centralized API service & normalizer
+│   └── vite.config.js        # Vite dev proxy forwarding /api -> :8000
+├── backend/                  # FastAPI + Python 3.12 Backend
+│   ├── app/main.py           # FastAPI entrypoint, CORS, routers
+│   ├── app/api/routes.py     # Endpoints: /api/health and /api/search
+│   ├── app/models/schemas.py # Strict Pydantic models (Listing, SearchResponse)
+│   ├── app/services/         # TinyFish client, Matcher, Pricing, Salt Resolver
+│   ├── cache.db              # SQLite cache database (created on first run)
+│   ├── sources.yaml          # Registry of pharmacy sources & search templates
+│   └── requirements.txt      # Python dependencies
+├── scripts/                  # Cross-platform runner scripts (dev, tests, benchmark)
+├── samples/                  # Real raw TinyFish responses & verification runs
+├── docs/                     # Architecture, economics, demo scripts
+├── package.json              # Monorepo root orchestrator (concurrently)
+└── .env.example              # Unified environment configuration
 ```
 
 ---
@@ -72,8 +79,8 @@ We benchmarked our deterministic equivalence rules and salt resolution on a hand
 ## 💻 How to Run Locally
 
 ### 1. Prerequisites
-- Node.js 18+ (for frontend)
-- Python 3.11+ (for backend)
+- **Node.js 18+**
+- **Python 3.11+**
 - TinyFish API Key ([agent.tinyfish.ai/api-keys](https://agent.tinyfish.ai/api-keys))
 - Google Gemini API Key ([aistudio.google.com](https://aistudio.google.com/app/apikey))
 
@@ -93,26 +100,46 @@ LLM_PROVIDER=gemini
 LLM_API_KEY=your_gemini_key_here
 ```
 
-### 3. Start Backend
+### 3. Install Dependencies
 ```bash
-cd backend
-pip install -r requirements.txt
-uvicorn app.main:app --reload --port 8000
-```
-- Interactive Swagger API docs: `http://localhost:8000/docs`
-
-### 4. Start Frontend
-In a new terminal:
-```bash
+# Install frontend & root dependencies
+npm run install:all
 npm install
+
+# Install backend dependencies
+cd backend
+python -m venv .venv
+# On Windows:
+.venv\Scripts\pip install -r requirements.txt
+# On Linux / macOS:
+source .venv/bin/activate && pip install -r requirements.txt
+cd ..
+```
+
+### 4. One-Command Start (Frontend + Backend)
+From the repository root:
+```bash
 npm run dev
 ```
-- Frontend app: `http://localhost:5173`
+This concurrently starts:
+- **Backend API**: `http://localhost:8000` (Interactive docs at `http://localhost:8000/docs`)
+- **Frontend App**: `http://localhost:5173`
 
-### 5. Running Tests
+*(Alternatively, you can run them in separate terminals with `npm run dev:backend` and `npm run dev:frontend`)*
+
+### 5. Running Tests & Benchmarks
 ```bash
-cd backend
-python -m pytest backend/tests
+# Run backend pytest suite (24 tests)
+npm run test:backend
+
+# Run 20-medicine benchmark accuracy test (122 assertions)
+npm run test:benchmark
+
+# Run frontend linter
+npm run lint
+
+# Build frontend production bundle
+npm run build
 ```
 
 ---

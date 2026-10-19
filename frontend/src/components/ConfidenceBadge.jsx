@@ -2,7 +2,14 @@ import React from 'react';
 import { ShieldCheck, AlertCircle, AlertTriangle } from 'lucide-react';
 
 export default function ConfidenceBadge({ confidence }) {
-  const norm = (confidence || 'high').toLowerCase();
+  let norm = 'high';
+  if (typeof confidence === 'number') {
+    if (confidence >= 0.8) norm = 'high';
+    else if (confidence >= 0.5) norm = 'review';
+    else norm = 'low';
+  } else if (typeof confidence === 'string') {
+    norm = confidence.toLowerCase();
+  }
 
   if (norm === 'high') {
     return (

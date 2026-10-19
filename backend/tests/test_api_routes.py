@@ -123,3 +123,25 @@ def test_search_cached_flow_with_pincode():
     assert data["reference_listing"]["price_per_unit_inr"] == 2.15
     assert len(data["results"]) == 1
     assert data["sources"][0]["status"] == "cached"
+
+
+def test_root_endpoint():
+    response = client.get("/")
+    assert response.status_code == 200
+    data = response.json()
+    assert data["name"] == "Dawa Dost API"
+    assert data["status"] == "online"
+    assert data["docs"] == "/docs"
+
+
+def test_cors_headers():
+    response = client.options(
+        "/api/health",
+        headers={
+            "Origin": "http://localhost:5173",
+            "Access-Control-Request-Method": "GET",
+        },
+    )
+    assert response.status_code == 200
+    assert response.headers.get("access-control-allow-origin") == "http://localhost:5173"
+

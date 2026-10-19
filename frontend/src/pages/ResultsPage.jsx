@@ -142,7 +142,12 @@ export default function ResultsPage() {
       }
 
       // Match Confidence Filter
-      const conf = (item.match_confidence || 'high').toLowerCase();
+      let conf = 'high';
+      if (typeof item.match_confidence === 'number') {
+        conf = item.match_confidence >= 0.8 ? 'high' : item.match_confidence >= 0.5 ? 'review' : 'low';
+      } else if (typeof item.match_confidence === 'string') {
+        conf = item.match_confidence.toLowerCase();
+      }
       if (conf === 'high' && !filters.confidence.high) return false;
       if (conf === 'review' && !filters.confidence.review) return false;
       if (conf === 'low' && !filters.confidence.low) return false;

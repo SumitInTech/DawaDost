@@ -24,6 +24,10 @@ export default function MedicineSummary({ resolved, query, isMock = false }) {
     );
   }
 
+  const saltsDisplay = Array.isArray(resolved.salts)
+    ? resolved.salts.map((s) => s.charAt(0).toUpperCase() + s.slice(1)).join(' + ')
+    : (resolved.salts || '—');
+
   return (
     <div className="medicine-summary-card card" aria-label="Searched medicine clinical summary">
       <div className="summary-card-inner">
@@ -53,8 +57,8 @@ export default function MedicineSummary({ resolved, query, isMock = false }) {
               <Activity size={14} className="metric-icon" aria-hidden="true" />
               <span>Active Salt</span>
             </div>
-            <div className="metric-value font-medium" title={resolved.salts}>
-              {resolved.salts || '—'}
+            <div className="metric-value font-medium" title={saltsDisplay}>
+              {saltsDisplay}
             </div>
           </div>
 

@@ -1,9 +1,18 @@
 import React from 'react';
 import { AlertCircle, Sparkles, Scale } from 'lucide-react';
 
-export default function SavingsBanner({ savings, referenceListing }) {
+export default function SavingsBanner({ savings = {}, referenceListing }) {
+  const refUnitPrice = savings?.reference_unit_price_inr ?? referenceListing?.price_per_unit_inr ?? null;
+  const refPackPrice = savings?.reference_brand_price_inr ?? referenceListing?.price_inr ?? null;
+  const unitSavings = savings?.potential_unit_savings_inr ?? savings?.vs_reference_inr_per_unit ?? 0;
+  const pctSavings = savings?.percentage_unit_savings ?? savings?.vs_reference_percent ?? 0;
+  const lowestUnitPrice = savings?.lowest_unit_price_inr ?? null;
+  const lowestPackPrice = savings?.lowest_pack_price_inr ?? null;
+  const packSavings = savings?.potential_pack_savings_inr ?? null;
+  const packSavingsNote = savings?.pack_savings_note || 'Unit-level comparison isolates true medicine price irrespective of varying strip packaging.';
+
   // If baseline reference is completely missing
-  if (!savings || !referenceListing || savings.reference_unit_price_inr === null || savings.reference_unit_price_inr === undefined) {
+  if (refUnitPrice === null || refUnitPrice === undefined) {
     return (
       <div className="savings-banner savings-banner-unavailable">
         <div className="savings-unavailable-inner">
@@ -19,18 +28,7 @@ export default function SavingsBanner({ savings, referenceListing }) {
     );
   }
 
-  const {
-    reference_brand_price_inr,
-    reference_unit_price_inr,
-    lowest_pack_price_inr,
-    lowest_unit_price_inr,
-    potential_unit_savings_inr,
-    percentage_unit_savings,
-    potential_pack_savings_inr,
-    pack_savings_note
-  } = savings;
-
-  const hasSavings = potential_unit_savings_inr !== null && potential_unit_savings_inr !== undefined && potential_unit_savings_inr > 0;
+  const hasSavings = unitSavings > 0;
 
   return (
     <section className="savings-banner card" aria-label="Potential Price Savings Summary">
@@ -42,9 +40,9 @@ export default function SavingsBanner({ savings, referenceListing }) {
               <Sparkles size={13} aria-hidden="true" />
               <span>Unit Price Advantage</span>
             </span>
-            {percentage_unit_savings && (
+            {pctSavings > 0 && (
               <span className="savings-percentage-tag">
-                {percentage_unit_savings}% Lower
+                {pctSavings}% Lower
               </span>
             )}
           </div>
@@ -53,7 +51,7 @@ export default function SavingsBanner({ savings, referenceListing }) {
             {hasSavings ? (
               <>
                 <span className="savings-prefix">Save up to</span>
-                <span className="savings-amount">₹{potential_unit_savings_inr.toFixed(2)}</span>
+                <span className="savings-amount">₹{Number(unitSavings).toFixed(2)}</span>
                 <span className="savings-unit">per unit</span>
               </>
             ) : (
@@ -63,9 +61,7 @@ export default function SavingsBanner({ savings, referenceListing }) {
 
           <div className="savings-clarity-note">
             <Scale size={14} className="note-icon" aria-hidden="true" />
-            <span>
-              {pack_savings_note || 'Unit-level comparison isolates true medicine price irrespective of varying strip packaging.'}
-            </span>
+            <span>{packSavingsNote}</span>
           </div>
         </div>
 
@@ -76,12 +72,12 @@ export default function SavingsBanner({ savings, referenceListing }) {
             <span className="metric-box-sub">Reference Brand Benchmark</span>
             <div className="metric-box-price">
               <span className="currency">₹</span>
-              <span className="val">{reference_unit_price_inr.toFixed(2)}</span>
+              <span className="val">{Number(refUnitPrice).toFixed(2)}</span>
               <span className="per">/ unit</span>
             </div>
-            {reference_brand_price_inr && (
+            {refPackPrice && (
               <span className="metric-box-pack">
-                Pack: ₹{reference_brand_price_inr.toFixed(2)}
+                Pack: ₹{Number(refPackPrice).toFixed(2)}
               </span>
             )}
           </div>
@@ -92,26 +88,26 @@ export default function SavingsBanner({ savings, referenceListing }) {
             <div className="metric-box-price text-teal">
               <span className="currency">₹</span>
               <span className="val">
-                {lowest_unit_price_inr !== undefined && lowest_unit_price_inr !== null
-                  ? lowest_unit_price_inr.toFixed(2)
+                {lowestUnitPrice !== undefined && lowestUnitPrice !== null
+                  ? Number(lowestUnitPrice).toFixed(2)
                   : '—'}
               </span>
               <span className="per">/ unit</span>
             </div>
-            {lowest_pack_price_inr && (
+            {lowestPackPrice && (
               <span className="metric-box-pack">
-                Pack: ₹{lowest_pack_price_inr.toFixed(2)}
+                Pack: ₹{Number(lowestPackPrice).toFixed(2)}
               </span>
             )}
           </div>
 
           {/* Potential Pack Savings */}
-          {potential_pack_savings_inr !== undefined && potential_pack_savings_inr !== null && (
+          {packSavings !== undefined && packSavings !== null && (
             <div className="savings-metric-box savings-metric-box-pack">
               <span className="metric-box-sub">Potential Strip Savings</span>
               <div className="metric-box-price text-success">
                 <span className="currency">₹</span>
-                <span className="val">{potential_pack_savings_inr.toFixed(2)}</span>
+                <span className="val">{Number(packSavings).toFixed(2)}</span>
               </div>
               <span className="metric-box-pack">
                 Normalized like-for-like quantity
