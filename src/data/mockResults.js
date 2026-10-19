@@ -1,0 +1,751 @@
+/**
+ * Mock data for Dawa Dost Medicine Price Comparison Platform
+ * Contains realistic pharmaceutical listings across popular Indian retail and online pharmacies.
+ * Conforms to the proposed FastAPI backend schema.
+ */
+
+export const MOCK_DATABASE = {
+  "augmentin": {
+    query: "Augmentin 625 Duo",
+    resolved: {
+      product_name: "Augmentin 625 Duo Tablet",
+      brand: "GlaxoSmithKline Pharmaceuticals Ltd",
+      salts: "Amoxicillin (500mg) + Clavulanic Acid (125mg)",
+      strength: "625 mg",
+      form: "Tablet",
+      pack_size_units: 10,
+      reference_price_inr: 223.50,
+      reference_unit_price_inr: 22.35
+    },
+    reference_listing: {
+      source: "Tata 1mg",
+      product_name: "Augmentin 625 Duo Tablet",
+      brand: "GlaxoSmithKline Pharmaceuticals Ltd",
+      salts: "Amoxicillin (500mg) + Clavulanic Acid (125mg)",
+      strength: "625 mg",
+      form: "Tablet",
+      pack_size_units: 10,
+      price_inr: 223.50,
+      price_per_unit_inr: 22.35,
+      in_stock: true,
+      url: "https://www.1mg.com/drugs/augmentin-625-duo-tablet-138629",
+      fetched_at: new Date(Date.now() - 3 * 60 * 1000).toISOString(),
+      cached: false,
+      is_reference_brand: true,
+      match_confidence: "high",
+      flags: ["Reference brand queried", "Exact salt & dosage match"]
+    },
+    savings: {
+      reference_brand_price_inr: 223.50,
+      reference_unit_price_inr: 22.35,
+      lowest_pack_price_inr: 118.00,
+      lowest_unit_price_inr: 11.80,
+      potential_unit_savings_inr: 10.55,
+      percentage_unit_savings: 47.2,
+      potential_pack_savings_inr: 105.50,
+      pack_savings_note: "Savings comparison calculated for standard 10-tablet strip equivalent"
+    },
+    sources: [
+      { name: "Tata 1mg", status: "ok", fetched_at: new Date(Date.now() - 3 * 60 * 1000).toISOString(), results_count: 3 },
+      { name: "Apollo Pharmacy", status: "ok", fetched_at: new Date(Date.now() - 4 * 60 * 1000).toISOString(), results_count: 2 },
+      { name: "PharmEasy", status: "cached", fetched_at: new Date(Date.now() - 35 * 60 * 1000).toISOString(), results_count: 2 },
+      { name: "Netmeds", status: "ok", fetched_at: new Date(Date.now() - 6 * 60 * 1000).toISOString(), results_count: 1 },
+      { name: "Truemeds", status: "cached", fetched_at: new Date(Date.now() - 120 * 60 * 1000).toISOString(), results_count: 1 }
+    ],
+    results: [
+      {
+        id: "res-aug-1",
+        source: "Truemeds",
+        product_name: "Novamox CV 625 Tablet",
+        brand: "Cipla Ltd",
+        salts: "Amoxicillin (500mg) + Clavulanic Acid (125mg)",
+        strength: "625 mg",
+        form: "Tablet",
+        pack_size_units: 10,
+        price_inr: 118.00,
+        price_per_unit_inr: 11.80,
+        in_stock: true,
+        distance_km: 1.8,
+        url: "https://www.truemeds.com/medicine/novamox-cv-625-tablet",
+        fetched_at: new Date(Date.now() - 120 * 60 * 1000).toISOString(),
+        cached: true,
+        is_reference_brand: false,
+        match_confidence: "high",
+        savings_vs_ref_unit: 10.55,
+        flags: ["Identical active salt ratio", "Standard 10-strip pack", "Verified bioequivalent"]
+      },
+      {
+        id: "res-aug-2",
+        source: "Apollo Pharmacy",
+        product_name: "Moxikind-CV 625 Tablet",
+        brand: "Mankind Pharma Ltd",
+        salts: "Amoxicillin (500mg) + Clavulanic Acid (125mg)",
+        strength: "625 mg",
+        form: "Tablet",
+        pack_size_units: 10,
+        price_inr: 154.00,
+        price_per_unit_inr: 15.40,
+        in_stock: true,
+        distance_km: 2.4,
+        url: "https://www.apollopharmacy.in/medicine/moxikind-cv-625-tablet",
+        fetched_at: new Date(Date.now() - 4 * 60 * 1000).toISOString(),
+        cached: false,
+        is_reference_brand: false,
+        match_confidence: "high",
+        savings_vs_ref_unit: 6.95,
+        flags: ["Top domestic manufacturer", "Store pickup available"]
+      },
+      {
+        id: "res-aug-3",
+        source: "Tata 1mg",
+        product_name: "Clavam 625 Tablet",
+        brand: "Alkem Laboratories Ltd",
+        salts: "Amoxicillin (500mg) + Clavulanic Acid (125mg)",
+        strength: "625 mg",
+        form: "Tablet",
+        pack_size_units: 10,
+        price_inr: 168.00,
+        price_per_unit_inr: 16.80,
+        in_stock: true,
+        distance_km: 3.1,
+        url: "https://www.1mg.com/drugs/clavam-625-tablet-33898",
+        fetched_at: new Date(Date.now() - 3 * 60 * 1000).toISOString(),
+        cached: false,
+        is_reference_brand: false,
+        match_confidence: "high",
+        savings_vs_ref_unit: 5.55,
+        flags: ["Widely prescribed formulation", "Alkem standard batch"]
+      },
+      {
+        id: "res-aug-4",
+        source: "PharmEasy",
+        product_name: "Amoxyclav 625 Tablet",
+        brand: "Abbott Healthcare",
+        salts: "Amoxicillin (500mg) + Clavulanic Acid (125mg)",
+        strength: "625 mg",
+        form: "Tablet",
+        pack_size_units: 6,
+        price_inr: 114.00,
+        price_per_unit_inr: 19.00,
+        in_stock: true,
+        distance_km: 4.5,
+        url: "https://pharmeasy.in/online-medicine-order/amoxyclav-625-tablet",
+        fetched_at: new Date(Date.now() - 35 * 60 * 1000).toISOString(),
+        cached: true,
+        is_reference_brand: false,
+        match_confidence: "high",
+        savings_vs_ref_unit: 3.35,
+        flags: ["Pack size: 6 units (unit rate ₹19.00 vs ₹22.35 ref)"]
+      },
+      {
+        id: "res-aug-5",
+        source: "Netmeds",
+        product_name: "Polyclav 625 Tablet",
+        brand: "Macleods Pharmaceuticals Ltd",
+        salts: "Amoxicillin (500mg) + Clavulanic Acid (125mg)",
+        strength: "625 mg",
+        form: "Tablet",
+        pack_size_units: 10,
+        price_inr: 162.00,
+        price_per_unit_inr: 16.20,
+        in_stock: false,
+        distance_km: null,
+        url: "https://www.netmeds.com/prescriptions/polyclav-625-tablet",
+        fetched_at: new Date(Date.now() - 6 * 60 * 1000).toISOString(),
+        cached: false,
+        is_reference_brand: false,
+        match_confidence: "high",
+        savings_vs_ref_unit: 6.15,
+        flags: ["Currently out of stock at this provider"]
+      },
+      {
+        id: "res-aug-6",
+        source: "Apollo Pharmacy",
+        product_name: "Augmentin 625 Duo Tablet (Reference)",
+        brand: "GlaxoSmithKline Pharmaceuticals Ltd",
+        salts: "Amoxicillin (500mg) + Clavulanic Acid (125mg)",
+        strength: "625 mg",
+        form: "Tablet",
+        pack_size_units: 10,
+        price_inr: 223.50,
+        price_per_unit_inr: 22.35,
+        in_stock: true,
+        distance_km: 2.4,
+        url: "https://www.apollopharmacy.in/medicine/augmentin-625-duo-tablet",
+        fetched_at: new Date(Date.now() - 4 * 60 * 1000).toISOString(),
+        cached: false,
+        is_reference_brand: true,
+        match_confidence: "high",
+        savings_vs_ref_unit: 0.00,
+        flags: ["Reference brand listing"]
+      },
+      {
+        id: "res-aug-7",
+        source: "Tata 1mg",
+        product_name: "Sensiclav 625 Dry Syrup Formulation",
+        brand: "Macleods Pharmaceuticals Ltd",
+        salts: "Amoxicillin (500mg) + Clavulanic Acid (125mg) equivalent per 5ml",
+        strength: "625 mg eq.",
+        form: "Suspension",
+        pack_size_units: 1,
+        price_inr: 145.00,
+        price_per_unit_inr: 145.00,
+        in_stock: null,
+        distance_km: 5.2,
+        url: "https://www.1mg.com/drugs/sensiclav-dry-syrup",
+        fetched_at: new Date(Date.now() - 15 * 60 * 1000).toISOString(),
+        cached: true,
+        is_reference_brand: false,
+        match_confidence: "review",
+        savings_vs_ref_unit: null,
+        flags: ["Different dosage form (Suspension vs Tablet) — Review suitability"]
+      },
+      {
+        id: "res-aug-8",
+        source: "PharmEasy",
+        product_name: "Generic Clav-Amox Dispersible 625",
+        brand: "Jan Aushadhi Kendra Supply",
+        salts: "Amoxicillin Trihydrate + Potassium Clavulanate",
+        strength: "625 mg",
+        form: "Dispersible Tablet",
+        pack_size_units: 10,
+        price_inr: 65.00,
+        price_per_unit_inr: 6.50,
+        in_stock: true,
+        distance_km: 6.0,
+        url: "https://pharmeasy.in/online-medicine-order/amox-clav-dispersible",
+        fetched_at: new Date(Date.now() - 50 * 60 * 1000).toISOString(),
+        cached: true,
+        is_reference_brand: false,
+        match_confidence: "low",
+        savings_vs_ref_unit: 15.85,
+        flags: ["Dispersible release mechanism differs from standard film-coated tablet — Consult doctor"]
+      }
+    ],
+    warnings: [
+      "Prices retrieved within the last 2 hours. Stock status subject to real-time pharmacy confirmation.",
+      "Always confirm with your pharmacist that the active salt, strength, and release profile match your prescription."
+    ],
+    disclaimer: "Dawa Dost provides price comparisons, not medical advice. Confirm the medicine, active salt, strength, dosage form, and suitability with your pharmacist or doctor before considering an alternative."
+  },
+
+  "dolo": {
+    query: "Dolo 650",
+    resolved: {
+      product_name: "Dolo 650 Tablet",
+      brand: "Micro Labs Ltd",
+      salts: "Paracetamol / Acetaminophen",
+      strength: "650 mg",
+      form: "Tablet",
+      pack_size_units: 15,
+      reference_price_inr: 33.60,
+      reference_unit_price_inr: 2.24
+    },
+    reference_listing: {
+      source: "Tata 1mg",
+      product_name: "Dolo 650 Tablet",
+      brand: "Micro Labs Ltd",
+      salts: "Paracetamol",
+      strength: "650 mg",
+      form: "Tablet",
+      pack_size_units: 15,
+      price_inr: 33.60,
+      price_per_unit_inr: 2.24,
+      in_stock: true,
+      url: "https://www.1mg.com/drugs/dolo-650-tablet-41634",
+      fetched_at: new Date(Date.now() - 2 * 60 * 1000).toISOString(),
+      cached: false,
+      is_reference_brand: true,
+      match_confidence: "high",
+      flags: ["Reference brand queried"]
+    },
+    savings: {
+      reference_brand_price_inr: 33.60,
+      reference_unit_price_inr: 2.24,
+      lowest_pack_price_inr: 18.00,
+      lowest_unit_price_inr: 1.20,
+      potential_unit_savings_inr: 1.04,
+      percentage_unit_savings: 46.4,
+      potential_pack_savings_inr: 15.60,
+      pack_savings_note: "Savings normalized to 15-tablet pack"
+    },
+    sources: [
+      { name: "Tata 1mg", status: "ok", fetched_at: new Date(Date.now() - 2 * 60 * 1000).toISOString(), results_count: 3 },
+      { name: "Apollo Pharmacy", status: "ok", fetched_at: new Date(Date.now() - 5 * 60 * 1000).toISOString(), results_count: 3 },
+      { name: "PharmEasy", status: "ok", fetched_at: new Date(Date.now() - 10 * 60 * 1000).toISOString(), results_count: 2 }
+    ],
+    results: [
+      {
+        id: "res-dolo-1",
+        source: "PharmEasy",
+        product_name: "P-650 Tablet",
+        brand: "Apex Laboratories Pvt Ltd",
+        salts: "Paracetamol",
+        strength: "650 mg",
+        form: "Tablet",
+        pack_size_units: 15,
+        price_inr: 18.00,
+        price_per_unit_inr: 1.20,
+        in_stock: true,
+        distance_km: 2.1,
+        url: "https://pharmeasy.in/online-medicine-order/p-650-tablet",
+        fetched_at: new Date(Date.now() - 10 * 60 * 1000).toISOString(),
+        cached: false,
+        is_reference_brand: false,
+        match_confidence: "high",
+        savings_vs_ref_unit: 1.04,
+        flags: ["Identical strength (650mg)", "Same pack count (15 tablets)"]
+      },
+      {
+        id: "res-dolo-2",
+        source: "Apollo Pharmacy",
+        product_name: "Calpol 650 Tablet",
+        brand: "GlaxoSmithKline Pharmaceuticals Ltd",
+        salts: "Paracetamol",
+        strength: "650 mg",
+        form: "Tablet",
+        pack_size_units: 15,
+        price_inr: 29.50,
+        price_per_unit_inr: 1.97,
+        in_stock: true,
+        distance_km: 1.5,
+        url: "https://www.apollopharmacy.in/medicine/calpol-650-tablet",
+        fetched_at: new Date(Date.now() - 5 * 60 * 1000).toISOString(),
+        cached: false,
+        is_reference_brand: false,
+        match_confidence: "high",
+        savings_vs_ref_unit: 0.27,
+        flags: ["Widely trusted multinational brand"]
+      },
+      {
+        id: "res-dolo-3",
+        source: "Tata 1mg",
+        product_name: "Pacimol 650 Tablet",
+        brand: "Ipca Laboratories Ltd",
+        salts: "Paracetamol",
+        strength: "650 mg",
+        form: "Tablet",
+        pack_size_units: 15,
+        price_inr: 24.00,
+        price_per_unit_inr: 1.60,
+        in_stock: true,
+        distance_km: 3.8,
+        url: "https://www.1mg.com/drugs/pacimol-650-tablet-161688",
+        fetched_at: new Date(Date.now() - 2 * 60 * 1000).toISOString(),
+        cached: false,
+        is_reference_brand: false,
+        match_confidence: "high",
+        savings_vs_ref_unit: 0.64,
+        flags: ["Exact bioequivalent"]
+      },
+      {
+        id: "res-dolo-4",
+        source: "Apollo Pharmacy",
+        product_name: "Dolo 650 Tablet (Reference)",
+        brand: "Micro Labs Ltd",
+        salts: "Paracetamol",
+        strength: "650 mg",
+        form: "Tablet",
+        pack_size_units: 15,
+        price_inr: 33.60,
+        price_per_unit_inr: 2.24,
+        in_stock: true,
+        distance_km: 1.5,
+        url: "https://www.apollopharmacy.in/medicine/dolo-650-tablet",
+        fetched_at: new Date(Date.now() - 5 * 60 * 1000).toISOString(),
+        cached: false,
+        is_reference_brand: true,
+        match_confidence: "high",
+        savings_vs_ref_unit: 0.00,
+        flags: ["Reference brand"]
+      },
+      {
+        id: "res-dolo-5",
+        source: "Tata 1mg",
+        product_name: "Dolopar 650 Tablet",
+        brand: "Micro Labs Ltd",
+        salts: "Paracetamol",
+        strength: "650 mg",
+        form: "Tablet",
+        pack_size_units: 10,
+        price_inr: 20.50,
+        price_per_unit_inr: 2.05,
+        in_stock: false,
+        distance_km: null,
+        url: "https://www.1mg.com/drugs/dolopar-650-tablet",
+        fetched_at: new Date(Date.now() - 15 * 60 * 1000).toISOString(),
+        cached: true,
+        is_reference_brand: false,
+        match_confidence: "high",
+        savings_vs_ref_unit: 0.19,
+        flags: ["10-tablet pack variant", "Out of stock"]
+      }
+    ],
+    warnings: [
+      "Prices retrieved within the last hour. Verify availability at physical stores."
+    ],
+    disclaimer: "Dawa Dost provides price comparisons, not medical advice. Confirm medicine details with your pharmacist or doctor."
+  },
+
+  "pan": {
+    query: "Pan 40",
+    resolved: {
+      product_name: "Pan 40 Tablet",
+      brand: "Alkem Laboratories Ltd",
+      salts: "Pantoprazole",
+      strength: "40 mg",
+      form: "Gastro-resistant Tablet",
+      pack_size_units: 15,
+      reference_price_inr: 168.00,
+      reference_unit_price_inr: 11.20
+    },
+    reference_listing: {
+      source: "Tata 1mg",
+      product_name: "Pan 40 Tablet",
+      brand: "Alkem Laboratories Ltd",
+      salts: "Pantoprazole",
+      strength: "40 mg",
+      form: "Gastro-resistant Tablet",
+      pack_size_units: 15,
+      price_inr: 168.00,
+      price_per_unit_inr: 11.20,
+      in_stock: true,
+      url: "https://www.1mg.com/drugs/pan-40-tablet-69871",
+      fetched_at: new Date(Date.now() - 10 * 60 * 1000).toISOString(),
+      cached: false,
+      is_reference_brand: true,
+      match_confidence: "high",
+      flags: ["Reference brand"]
+    },
+    savings: {
+      reference_brand_price_inr: 168.00,
+      reference_unit_price_inr: 11.20,
+      lowest_pack_price_inr: 85.00,
+      lowest_unit_price_inr: 5.67,
+      potential_unit_savings_inr: 5.53,
+      percentage_unit_savings: 49.4,
+      potential_pack_savings_inr: 83.00,
+      pack_savings_note: "Normalized to 15-tablet pack size"
+    },
+    sources: [
+      { name: "Tata 1mg", status: "ok", fetched_at: new Date(Date.now() - 10 * 60 * 1000).toISOString(), results_count: 2 },
+      { name: "Apollo Pharmacy", status: "ok", fetched_at: new Date(Date.now() - 8 * 60 * 1000).toISOString(), results_count: 2 },
+      { name: "PharmEasy", status: "cached", fetched_at: new Date(Date.now() - 40 * 60 * 1000).toISOString(), results_count: 2 }
+    ],
+    results: [
+      {
+        id: "res-pan-1",
+        source: "PharmEasy",
+        product_name: "Pantocid 40 Tablet",
+        brand: "Sun Pharmaceutical Industries Ltd",
+        salts: "Pantoprazole",
+        strength: "40 mg",
+        form: "Tablet",
+        pack_size_units: 15,
+        price_inr: 142.00,
+        price_per_unit_inr: 9.47,
+        in_stock: true,
+        distance_km: 2.2,
+        url: "https://pharmeasy.in/online-medicine-order/pantocid-40-tablet",
+        fetched_at: new Date(Date.now() - 40 * 60 * 1000).toISOString(),
+        cached: true,
+        is_reference_brand: false,
+        match_confidence: "high",
+        savings_vs_ref_unit: 1.73,
+        flags: ["Sun Pharma formulation", "Same 15-tablet pack"]
+      },
+      {
+        id: "res-pan-2",
+        source: "Apollo Pharmacy",
+        product_name: "Pantosec 40 Tablet",
+        brand: "Cipla Ltd",
+        salts: "Pantoprazole",
+        strength: "40 mg",
+        form: "Tablet",
+        pack_size_units: 10,
+        price_inr: 85.00,
+        price_per_unit_inr: 8.50,
+        in_stock: true,
+        distance_km: 1.9,
+        url: "https://www.apollopharmacy.in/medicine/pantosec-40-tablet",
+        fetched_at: new Date(Date.now() - 8 * 60 * 1000).toISOString(),
+        cached: false,
+        is_reference_brand: false,
+        match_confidence: "high",
+        savings_vs_ref_unit: 2.70,
+        flags: ["10 tablets per pack", "Unit price ₹8.50 vs ₹11.20 ref"]
+      },
+      {
+        id: "res-pan-3",
+        source: "Tata 1mg",
+        product_name: "Pantodac 40 Tablet",
+        brand: "Zydus Cadila",
+        salts: "Pantoprazole",
+        strength: "40 mg",
+        form: "Tablet",
+        pack_size_units: 15,
+        price_inr: 125.00,
+        price_per_unit_inr: 8.33,
+        in_stock: true,
+        distance_km: 3.5,
+        url: "https://www.1mg.com/drugs/pantodac-40-tablet",
+        fetched_at: new Date(Date.now() - 10 * 60 * 1000).toISOString(),
+        cached: false,
+        is_reference_brand: false,
+        match_confidence: "high",
+        savings_vs_ref_unit: 2.87,
+        flags: ["Enteric coated tablet"]
+      },
+      {
+        id: "res-pan-4",
+        source: "Apollo Pharmacy",
+        product_name: "Pan 40 Tablet (Reference)",
+        brand: "Alkem Laboratories Ltd",
+        salts: "Pantoprazole",
+        strength: "40 mg",
+        form: "Tablet",
+        pack_size_units: 15,
+        price_inr: 168.00,
+        price_per_unit_inr: 11.20,
+        in_stock: true,
+        distance_km: 1.9,
+        url: "https://www.apollopharmacy.in/medicine/pan-40-tablet",
+        fetched_at: new Date(Date.now() - 8 * 60 * 1000).toISOString(),
+        cached: false,
+        is_reference_brand: true,
+        match_confidence: "high",
+        savings_vs_ref_unit: 0.00,
+        flags: ["Reference brand"]
+      },
+      {
+        id: "res-pan-5",
+        source: "PharmEasy",
+        product_name: "Pantop-D Capsule (Combination)",
+        brand: "Aristo Pharmaceuticals Pvt Ltd",
+        salts: "Pantoprazole (40mg) + Domperidone (10mg)",
+        strength: "40 mg + 10 mg",
+        form: "Capsule",
+        pack_size_units: 15,
+        price_inr: 150.00,
+        price_per_unit_inr: 10.00,
+        in_stock: null,
+        distance_km: 4.8,
+        url: "https://pharmeasy.in/online-medicine-order/pantop-d-capsule",
+        fetched_at: new Date(Date.now() - 40 * 60 * 1000).toISOString(),
+        cached: true,
+        is_reference_brand: false,
+        match_confidence: "review",
+        savings_vs_ref_unit: null,
+        flags: ["Contains additional active salt (Domperidone 10mg) — Not a pure equivalent"]
+      }
+    ],
+    warnings: [
+      "Confirm enteric-coating and release characteristics with your healthcare provider."
+    ],
+    disclaimer: "Dawa Dost provides price comparisons, not medical advice. Confirm with your pharmacist or doctor."
+  }
+};
+
+/**
+ * Helper to generate synthetic response for queries not in the explicit presets
+ */
+export function generateMockResponse(query, pincode = "") {
+  const normalized = (query || "").trim().toLowerCase();
+
+  // If user searched for empty result test keyword
+  if (normalized.includes("notfound") || normalized.includes("unknownmed") || normalized.includes("empty")) {
+    return {
+      query: query,
+      pincode: pincode,
+      resolved: null,
+      reference_listing: null,
+      results: [],
+      savings: null,
+      sources: [
+        { name: "Tata 1mg", status: "ok", fetched_at: new Date().toISOString(), results_count: 0 },
+        { name: "Apollo Pharmacy", status: "ok", fetched_at: new Date().toISOString(), results_count: 0 },
+        { name: "PharmEasy", status: "ok", fetched_at: new Date().toISOString(), results_count: 0 }
+      ],
+      warnings: ["No verified equivalence matches found in our indexed pharmacy sources."],
+      disclaimer: "Dawa Dost provides price comparisons, not medical advice."
+    };
+  }
+
+  // Check matching preset
+  for (const key of Object.keys(MOCK_DATABASE)) {
+    if (normalized.includes(key)) {
+      const data = JSON.parse(JSON.stringify(MOCK_DATABASE[key]));
+      data.pincode = pincode || "";
+      return data;
+    }
+  }
+
+  // Default synthetic response for any generic medicine search
+  const cleanName = query ? query.charAt(0).toUpperCase() + query.slice(1) : "ExampleBrand 500mg";
+  const refPackPrice = 140.00;
+  const refUnits = 10;
+  const refUnitPrice = refPackPrice / refUnits;
+  const lowUnitPrice = 8.20;
+  const unitSavings = +(refUnitPrice - lowUnitPrice).toFixed(2);
+  const pctSavings = +((unitSavings / refUnitPrice) * 100).toFixed(1);
+
+  return {
+    query: query || "ExampleBrand 500 mg",
+    pincode: pincode || "",
+    resolved: {
+      product_name: `${cleanName} Tablets`,
+      brand: "Standard Pharma Healthcare",
+      salts: "Bioactive Salt Complex (500mg)",
+      strength: "500 mg",
+      form: "Tablet",
+      pack_size_units: refUnits,
+      reference_price_inr: refPackPrice,
+      reference_unit_price_inr: refUnitPrice
+    },
+    reference_listing: {
+      source: "Tata 1mg",
+      product_name: `${cleanName} Tablets`,
+      brand: "Standard Pharma Healthcare",
+      salts: "Bioactive Salt Complex (500mg)",
+      strength: "500 mg",
+      form: "Tablet",
+      pack_size_units: refUnits,
+      price_inr: refPackPrice,
+      price_per_unit_inr: refUnitPrice,
+      in_stock: true,
+      url: "https://www.1mg.com",
+      fetched_at: new Date(Date.now() - 5 * 60 * 1000).toISOString(),
+      cached: false,
+      is_reference_brand: true,
+      match_confidence: "high",
+      flags: ["Reference query brand", "Illustrative data"]
+    },
+    savings: {
+      reference_brand_price_inr: refPackPrice,
+      reference_unit_price_inr: refUnitPrice,
+      lowest_pack_price_inr: 82.00,
+      lowest_unit_price_inr: lowUnitPrice,
+      potential_unit_savings_inr: unitSavings,
+      percentage_unit_savings: pctSavings,
+      potential_pack_savings_inr: +(unitSavings * refUnits).toFixed(2),
+      pack_savings_note: `Calculated on equivalent ${refUnits}-unit pack comparison`
+    },
+    sources: [
+      { name: "Tata 1mg", status: "ok", fetched_at: new Date(Date.now() - 5 * 60 * 1000).toISOString(), results_count: 2 },
+      { name: "Apollo Pharmacy", status: "ok", fetched_at: new Date(Date.now() - 12 * 60 * 1000).toISOString(), results_count: 2 },
+      { name: "PharmEasy", status: "cached", fetched_at: new Date(Date.now() - 45 * 60 * 1000).toISOString(), results_count: 1 },
+      { name: "Netmeds", status: "failed", fetched_at: new Date(Date.now() - 8 * 60 * 1000).toISOString(), results_count: 0, error: "Connection timeout" }
+    ],
+    results: [
+      {
+        id: "res-gen-1",
+        source: "Apollo Pharmacy",
+        product_name: `Generic-${cleanName.replace(/\s+/g, '')} Strip`,
+        brand: "Affordable Care Labs",
+        salts: "Bioactive Salt Complex (500mg)",
+        strength: "500 mg",
+        form: "Tablet",
+        pack_size_units: 10,
+        price_inr: 82.00,
+        price_per_unit_inr: 8.20,
+        in_stock: true,
+        distance_km: pincode ? 2.5 : null,
+        url: "https://www.apollopharmacy.in",
+        fetched_at: new Date(Date.now() - 12 * 60 * 1000).toISOString(),
+        cached: false,
+        is_reference_brand: false,
+        match_confidence: "high",
+        savings_vs_ref_unit: unitSavings,
+        flags: ["Identical active salt and release", "In stock"]
+      },
+      {
+        id: "res-gen-2",
+        source: "Tata 1mg",
+        product_name: `EquiHealth ${cleanName}`,
+        brand: "Zydus Life Care",
+        salts: "Bioactive Salt Complex (500mg)",
+        strength: "500 mg",
+        form: "Tablet",
+        pack_size_units: 10,
+        price_inr: 96.00,
+        price_per_unit_inr: 9.60,
+        in_stock: true,
+        distance_km: pincode ? 4.1 : null,
+        url: "https://www.1mg.com",
+        fetched_at: new Date(Date.now() - 5 * 60 * 1000).toISOString(),
+        cached: false,
+        is_reference_brand: false,
+        match_confidence: "high",
+        savings_vs_ref_unit: +(refUnitPrice - 9.60).toFixed(2),
+        flags: ["Standard bioequivalent formulation"]
+      },
+      {
+        id: "res-gen-3",
+        source: "PharmEasy",
+        product_name: `MediSave ${cleanName} XL`,
+        brand: "Sun Life Remedies",
+        salts: "Bioactive Salt Complex (500mg)",
+        strength: "500 mg",
+        form: "Tablet",
+        pack_size_units: 20,
+        price_inr: 170.00,
+        price_per_unit_inr: 8.50,
+        in_stock: true,
+        distance_km: pincode ? 5.8 : null,
+        url: "https://pharmeasy.in",
+        fetched_at: new Date(Date.now() - 45 * 60 * 1000).toISOString(),
+        cached: true,
+        is_reference_brand: false,
+        match_confidence: "high",
+        savings_vs_ref_unit: +(refUnitPrice - 8.50).toFixed(2),
+        flags: ["20-tablet economy pack (unit price ₹8.50)"]
+      },
+      {
+        id: "res-gen-4",
+        source: "Apollo Pharmacy",
+        product_name: `${cleanName} (Reference Brand)`,
+        brand: "Standard Pharma Healthcare",
+        salts: "Bioactive Salt Complex (500mg)",
+        strength: "500 mg",
+        form: "Tablet",
+        pack_size_units: 10,
+        price_inr: 140.00,
+        price_per_unit_inr: 14.00,
+        in_stock: true,
+        distance_km: pincode ? 2.5 : null,
+        url: "https://www.apollopharmacy.in",
+        fetched_at: new Date(Date.now() - 12 * 60 * 1000).toISOString(),
+        cached: false,
+        is_reference_brand: true,
+        match_confidence: "high",
+        savings_vs_ref_unit: 0.00,
+        flags: ["Reference brand queried"]
+      },
+      {
+        id: "res-gen-5",
+        source: "Tata 1mg",
+        product_name: `Altered-Release ${cleanName}`,
+        brand: "Apex Formulations",
+        salts: "Bioactive Salt Complex (500mg) Sustained",
+        strength: "500 mg SR",
+        form: "SR Tablet",
+        pack_size_units: 10,
+        price_inr: 110.00,
+        price_per_unit_inr: 11.00,
+        in_stock: false,
+        distance_km: null,
+        url: "https://www.1mg.com",
+        fetched_at: new Date(Date.now() - 5 * 60 * 1000).toISOString(),
+        cached: false,
+        is_reference_brand: false,
+        match_confidence: "review",
+        savings_vs_ref_unit: 3.00,
+        flags: ["Sustained release mechanism — Verify prescription compatibility", "Currently out of stock"]
+      }
+    ],
+    warnings: [
+      "Illustrative data shown for development and testing. Confirm with your pharmacist."
+    ],
+    disclaimer: "Dawa Dost provides price comparisons, not medical advice. Confirm active salt, strength, and dosage form with your doctor or pharmacist."
+  };
+}

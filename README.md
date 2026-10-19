@@ -1,22 +1,31 @@
 # Dawa Dost (दवा दोस्त) 💊🤝
 
-> "Medicine friend" — finding cheaper, generic-equivalent medicines with real live pharmacy prices and transparent unit-pricing.
+> "Medicine friend" — finding cheaper, equivalent versions of medicines with live pharmacy prices, verified active composition, and transparent unit pricing.
 
-Built for **Kritical Hacks 2026** (IGDTUW, Delhi) — AI/ML Track.
+Built for **Kritical Hacks 2026** (IGDTUW, Delhi) — Track: **AI/ML, Student Category**.
 
 ---
 
 ## 🌟 What Dawa Dost Is
 
-Dawa Dost is an intelligent medicine price comparison and equivalence engine:
-1. **Resolves** branded medicines to their active salt composition, dosage/strength, and dosage form.
-2. **Searches live pharmacy websites** via **TinyFish** (Search, Fetch, and Web Agent).
-3. **Extracts structured listings** (brand, salts, strength, form, pack size, price, stock).
-4. **Matches strict generic equivalents** (same salt, same strength, same form).
-5. **Calculates price per unit** (e.g., per tablet, capsule, or ml) to normalize disparate pack sizes.
+Dawa Dost is an intelligent medicine price comparison and bio-equivalence engine:
+1. **Resolves** branded medicines to their active chemical salt(s), dosage/strength, and dosage form.
+2. **Reads live pharmacy websites** via **TinyFish** (Tata 1mg, Apollo Pharmacy, Netmeds, Zeelab Pharmacy, PharmEasy, MedPlus Mart).
+3. **Extracts structured listings** (brand, salts, strength, form, pack size, price, stock, delivery timeline) powered by Gemini 3.5 Flash.
+4. **Matches strictly equivalent medicines** (identical chemical salts, metric strength normalization, identical dosage form).
+5. **Calculates price per unit** (e.g. per tablet, capsule, or ml) to normalize disparate pack sizes.
 6. **Ranks transparently** by price per unit and displays real-time savings versus the branded reference.
 
 > ⚠️ **Important Safety Disclaimer**: Dawa Dost does not sell medicines, does not take payments, and **provides no medical advice**. Equivalence is based strictly on chemical composition, strength, and form. Always confirm with a qualified doctor or licensed pharmacist before switching medications.
+
+---
+
+## 💡 Our Differentiators
+
+1. **Price per unit, not price per pack**: Deceptive pack size variations (10s vs 15s) are normalized to exact per-tablet or per-ml costs.
+2. **Deterministic bio-equivalence matching**: Python enforces strict chemical identity. **The LLM never computes prices, savings, or equivalence matches.**
+3. **Live web data via TinyFish**: Live pricing, stock availability, and 6-digit delivery pincode verification across top pharmacies.
+4. **Measured match accuracy**: **100.0% accuracy** across 122 automated test assertions on a hand-verified dataset of 20 real Indian reference medicines.
 
 ---
 
@@ -31,20 +40,20 @@ All TinyFish integration is centralized in [`backend/app/services/tinyfish_clien
 
 ---
 
-## 🛠️ Architecture
+## 🛠️ Unified Architecture
 
 ```
-React UI  ->  FastAPI Backend  ->  TinyFish (Search / Fetch / Agent)  ->  Pharmacy Sites
-                   |                                                               |
-                   |<--- Clean page content / Structured output -------------------|
-                   v
-           LLM Extraction (Raw text -> ExtractedListing)
-                   v
-           Deterministic Python Matcher (Salt + Strength + Form) & Unit Price Math
-                   v
-           Ranked Results (+ Savings, Confidence, Fetched-at)  ->  Frontend UI
-                   ^
-           SQLite Cache (Timestamped, TTL, USE_CACHE_ONLY fallback)
+React UI (Vite)  ──>  FastAPI Backend  ──>  TinyFish (Search / Fetch / Agent)  ──>  Pharmacy Sites
+                            │                                                              │
+                            │<── Clean page markdown / Structured output ──────────────────┘
+                            ▼
+             Google Gemini 3.5 Flash Extraction (Raw text -> ExtractedListing)
+                            ▼
+             Deterministic Python Engine (Salt + Strength + Form) & Unit Price Math
+                            ▼
+             Ranked Results (+ Savings, Confidence, Fetched-at, Pincode ETA)  ──>  React UI
+                            ▲
+             SQLite Cache (Timestamped, TTL, USE_CACHE_ONLY demo fail-safe)
 ```
 
 ---
@@ -60,56 +69,60 @@ We benchmarked our deterministic equivalence rules and salt resolution on a hand
 
 ---
 
-## 💻 How to Run
+## 💻 How to Run Locally
 
-### Prerequisites
-- Python 3.11+
+### 1. Prerequisites
+- Node.js 18+ (for frontend)
+- Python 3.11+ (for backend)
 - TinyFish API Key ([agent.tinyfish.ai/api-keys](https://agent.tinyfish.ai/api-keys))
+- Google Gemini API Key ([aistudio.google.com](https://aistudio.google.com/app/apikey))
 
-### Backend Setup
+### 2. Environment Setup
+Copy `.env.example` to `.env`:
 ```bash
-# Clone the repository
-git clone https://github.com/your-username/dawa-dost.git
-cd dawa-dost
-
-# Copy environment template
 cp .env.example .env
-# Edit .env and set TINYFISH_API_KEY, LLM_API_KEY, etc.
+```
+Fill in your keys in `.env`:
+```env
+# Frontend
+VITE_API_BASE_URL=http://localhost:8000
 
-# Install dependencies
+# Backend
+TINYFISH_API_KEY=your_tinyfish_key_here
+LLM_PROVIDER=gemini
+LLM_API_KEY=your_gemini_key_here
+```
+
+### 3. Start Backend
+```bash
 cd backend
 pip install -r requirements.txt
-
-# Run FastAPI server
 uvicorn app.main:app --reload --port 8000
 ```
+- Interactive Swagger API docs: `http://localhost:8000/docs`
 
-### Running Tests
+### 4. Start Frontend
+In a new terminal:
+```bash
+npm install
+npm run dev
+```
+- Frontend app: `http://localhost:5173`
+
+### 5. Running Tests
 ```bash
 cd backend
-pytest -v
+python -m pytest backend/tests
 ```
 
 ---
 
-## 📂 Project Structure
+## 🛡️ Medical Boundaries & Safety Disclaimer
 
-- `backend/app/api/`: FastAPI routing (`/api/health`, `/api/search`).
-- `backend/app/models/`: Pydantic data schemas (`Listing`, `ExtractedListing`, search requests/responses).
-- `backend/app/services/`: Core logic modules:
-  - `tinyfish_client.py`: Search, Fetch, and Agent integration.
-  - `sources.py`: Parallel pharmacy source orchestration.
-  - `extraction.py`: LLM-based structured extraction.
-  - `salt_resolver.py`: Brand to salt resolver with local seed table & LLM fallback.
-  - `matcher.py`: Strict chemical equivalence validation.
-  - `pricing.py`: Unit price calculation & savings math.
-  - `cache.py`: SQLite persistence and `USE_CACHE_ONLY` demo mode.
-- `samples/`: Raw TinyFish responses captured from real pharmacy sites.
-- `docs/`: Architecture diagrams, price economics, and demo scripts.
+**Dawa Dost is strictly a price-comparison search utility, NOT:**
+- An online pharmacy or medicine seller
+- A prescription fulfillment service
+- A medical diagnostic or treatment platform
+- A medical advice provider
 
----
-
-## ⚖️ Limitations & Ethical Stance
-- **Price-only ranking**: We rank results purely by normalized price per unit. No sponsored or affiliate bias alters ranking order.
-- **Public data only**: We access only public pharmacy pages.
-- **No medical advice**: Clear, persistent safety notices are embedded across both the API and UI.
+The application intentionally does **NOT** include cart, checkout, payments, or prescription uploads. Users are clearly instructed on every view to confirm the medicine, active salt, strength, dosage form, and suitability with their doctor or pharmacist before making any substitution.
