@@ -31,11 +31,40 @@ class ExtractedListing(BaseModel):
     @classmethod
     def normalize_salts(cls, v: Any) -> list[str]:
         if isinstance(v, str):
-            # Split comma or plus separated
             return [s.strip().lower() for s in v.replace("+", ",").split(",") if s.strip()]
         if isinstance(v, list):
             return [str(s).strip().lower() for s in v if str(s).strip()]
         return []
+
+    @field_validator("price_inr", mode="before")
+    @classmethod
+    def normalize_price(cls, v: Any) -> float:
+        if isinstance(v, (int, float)):
+            return float(v)
+        if isinstance(v, str):
+            import re
+            clean = re.sub(r"[^\d.]", "", v)
+            if clean:
+                return float(clean)
+        raise ValueError(f"Invalid price value: {v}")
+
+    @field_validator("pack_size_units", mode="before")
+    @classmethod
+    def normalize_pack_size(cls, v: Any) -> float | None:
+        if v is None:
+            return None
+        if isinstance(v, (int, float)):
+            return float(v) if v > 0 else None
+        if isinstance(v, str):
+            import re
+            clean = re.sub(r"[^\d.]", "", v)
+            if clean:
+                try:
+                    f = float(clean)
+                    return f if f > 0 else None
+                except ValueError:
+                    return None
+        return None
 
     @field_validator("form", mode="before")
     @classmethod

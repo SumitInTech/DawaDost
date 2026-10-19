@@ -75,8 +75,11 @@ class ExtractionService:
 
     async def _extract_with_llm(self, raw_text: str) -> dict[str, Any] | None:
         """Call LLM provider to extract structured fields."""
-        # Truncate text to avoid exceeding token limits while preserving critical header/pricing info
-        snippet = raw_text[:4000]
+        # Provide both header (title, salts) and footer/pricing region
+        if len(raw_text) > 4000:
+            snippet = raw_text[:2500] + "\n\n[...]\n\n" + raw_text[-1800:]
+        else:
+            snippet = raw_text
         prompt = f"Webpage text:\n\n{snippet}\n\nExtract the medicine listing details in JSON:"
 
         try:
@@ -84,8 +87,16 @@ class ExtractionService:
                 prompt=prompt,
                 system_prompt=EXTRACTION_SYSTEM_PROMPT,
             )
-            if isinstance(res, dict) and "price_inr" in res:
-                return res
+            if isinstance(res, list) and len(res) > 0 and isinstance(res[0], dict):
+                res = res[0]
+            if isinstance(res, dict):
+                # If LLM missed price, extract price with heuristic
+                if not res.get("price_inr"):
+                    price_match = re.search(r"(?:₹|Rs\.?)\s*([0-9]+(?:\.[0-9]{1,2})?)", raw_text)
+                    if price_match:
+                        res["price_inr"] = float(price_match.group(1))
+                if res.get("price_inr"):
+                    return res
         except Exception as exc:
             logger.debug(f"LLM extraction skipped or failed: {exc}")
 

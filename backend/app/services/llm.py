@@ -48,16 +48,21 @@ class LLMService:
 
         try:
             if self.provider == "gemini":
-                # Using google-genai SDK
                 full_prompt = f"{system_prompt}\n\n{prompt}" if system_prompt else prompt
-                response = self._client.models.generate_content(
-                    model="gemini-2.5-flash",
-                    contents=full_prompt,
-                    config={"response_mime_type": "application/json"},
-                )
-                text = response.text
-                if text:
-                    return json.loads(text)
+                # Try gemini-3.5-flash-lite first, fallback to gemini-3.8-flash
+                for model_candidate in ["gemini-3.5-flash-lite", "gemini-3.8-flash"]:
+                    try:
+                        response = self._client.models.generate_content(
+                            model=model_candidate,
+                            contents=full_prompt,
+                            config={"response_mime_type": "application/json"},
+                        )
+                        text = response.text
+                        if text:
+                            return json.loads(text)
+                    except Exception as model_err:
+                        logger.warning(f"Gemini model {model_candidate} failed: {model_err}, trying next...")
+                        continue
             elif self.provider == "openai":
                 messages = []
                 if system_prompt:
