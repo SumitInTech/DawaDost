@@ -1,5 +1,5 @@
 # Dawa Dost (दवा दोस्त) 💊🤝
-Demo Link : https://dawa-dost-6no46gwsp-sumit-in-tech.vercel.app/search
+Demo Link : https://dawa-dost-mu.vercel.app/
 > "Medicine friend" — finding cheaper, equivalent versions of medicines with live pharmacy prices, verified active composition, and transparent unit pricing.
 
 Built for **Kritical Hacks 2026** (IGDTUW, Delhi) — Track: **AI/ML, Student Category**.
