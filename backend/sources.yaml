@@ -1,5 +1,6 @@
 # Pharmacy Sources Configuration for Dawa Dost
 # All major verified Indian online pharmacies enabled
+# Strategy can be "fetch" (fast, free) or "agent" (interactive pincode/browser automation via TinyFish Agent)
 
 sources:
   - name: "Tata 1mg"
@@ -13,7 +14,7 @@ sources:
   - name: "Apollo Pharmacy"
     domain: "apollopharmacy.in"
     base_url: "https://www.apollopharmacy.in"
-    strategy: "fetch"
+    strategy: "agent" # TinyFish Agent for dynamic pincode, stock, and pricing extraction
     enabled: true
     stealth_needed: false
     search_url_template: "https://www.apollopharmacy.in/search-medicines/{query}"

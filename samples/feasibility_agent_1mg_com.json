@@ -1,0 +1,13 @@
+{
+  "run_id": "e91d0f46-85b5-4c67-97ea-3c8270770fc1",
+  "status": "COMPLETED",
+  "started_at": "2026-10-20T12:45:06.723Z",
+  "finished_at": "2026-10-20T12:45:22.849Z",
+  "num_of_steps": 3,
+  "cost_usd": 0.048,
+  "result": {
+    "product_name": "PAN 40 Tablet",
+    "price_inr": 185
+  },
+  "error": null
+}

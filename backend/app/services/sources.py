@@ -2,7 +2,7 @@
 
 Loads configuration from backend/sources.yaml, executes live searches and fetches
 across configured pharmacy websites concurrently using asyncio, isolates failures,
-and returns per-source execution statuses.
+and returns per-source execution statuses. Supports both TinyFish Fetch and TinyFish Agent.
 """
 
 from __future__ import annotations
@@ -52,6 +52,119 @@ class SourceOrchestrator:
     def get_enabled_sources(self) -> list[dict[str, Any]]:
         return [s for s in self.sources if s.get("enabled", True)]
 
+    async def _fetch_with_agent(
+        self,
+        source: dict[str, Any],
+        url: str,
+        resolved: ResolvedMedicine,
+        query: str,
+        pincode: str | None,
+        now: datetime,
+        browser_profile: str = "lite",
+    ) -> tuple[SourceStatus, list[dict[str, Any]]]:
+        """Execute TinyFish Agent browser automation for interactive sites or anti-bot bypass."""
+        name = source.get("name", "Unknown Pharmacy")
+        pincode_instruction = (
+            f" If there is a delivery pincode or location prompt, enter '{pincode}' to check availability."
+            if pincode
+            else ""
+        )
+        goal = (
+            f"Find medicine listing details for '{query}' on this page.{pincode_instruction} "
+            f"Extract the exact product name, brand, active salts, strength, dosage form (e.g. tablet, capsule, syrup), "
+            f"pack size units (count of tablets or ml), total pack price in INR, and in_stock status."
+        )
+        output_schema = {
+            "type": "object",
+            "properties": {
+                "product_name": {"type": "string"},
+                "brand": {"type": "string", "nullable": True},
+                "salts": {"type": "array", "items": {"type": "string"}},
+                "strength": {"type": "string", "nullable": True},
+                "form": {"type": "string", "nullable": True},
+                "pack_size_units": {"type": "number", "nullable": True},
+                "price_inr": {"type": "number"},
+                "in_stock": {"type": "boolean", "nullable": True},
+                "delivery_info": {"type": "string", "nullable": True},
+            },
+            "required": ["product_name", "price_inr"],
+        }
+
+        try:
+            agent_res = await self.client.run_agent(
+                url=url,
+                goal=goal,
+                browser_profile=browser_profile,  # type: ignore[arg-type]
+                output_schema=output_schema,
+                timeout=25.0,
+            )
+            result = agent_res.get("result") or {}
+            steps = agent_res.get("num_of_steps", 1)
+
+            if result and result.get("product_name") and result.get("price_inr"):
+                # Save structured raw sample for auditability & demo proof
+                self.client.save_sample(
+                    f"agent_{name.lower().replace(' ', '_')}_{now.strftime('%Y%m%d_%H%M%S')}.json",
+                    agent_res,
+                )
+
+                # Format into structured markdown text for unified downstream parsing
+                salts_str = ", ".join(result.get("salts", [])) if isinstance(result.get("salts"), list) else str(result.get("salts", ""))
+                structured_md = (
+                    f"# {result.get('product_name')}\n"
+                    f"Brand: {result.get('brand') or ''}\n"
+                    f"Salts: {salts_str}\n"
+                    f"Strength: {result.get('strength') or ''}\n"
+                    f"Form: {result.get('form') or ''}\n"
+                    f"Pack Size: {result.get('pack_size_units') or ''}\n"
+                    f"Price: Rs. {result.get('price_inr')}\n"
+                    f"In Stock: {result.get('in_stock', True)}\n"
+                )
+                deliv_info = result.get("delivery_info") or (f"Deliverable to {pincode}" if pincode else "In Stock")
+                raw_page = {
+                    "source": name,
+                    "url": url,
+                    "title": result.get("product_name", ""),
+                    "markdown_text": structured_md,
+                    "fetched_at": now.isoformat(),
+                    "delivery_pincode": pincode,
+                    "delivery_info": deliv_info,
+                    "agent_steps": steps,
+                }
+                return (
+                    SourceStatus(
+                        name=name,
+                        status="ok",
+                        fetched_at=now,
+                        message=f"Live extracted via TinyFish Agent ({steps} steps)",
+                    ),
+                    [raw_page],
+                )
+            else:
+                err_msg = "Agent returned incomplete product data"
+                if isinstance(agent_res.get("error"), dict):
+                    err_msg = agent_res["error"].get("message", err_msg)
+                return (
+                    SourceStatus(
+                        name=name,
+                        status="failed",
+                        fetched_at=now,
+                        message=err_msg,
+                    ),
+                    [],
+                )
+        except Exception as exc:
+            logger.warning(f"TinyFish Agent execution error for {name}: {exc}")
+            return (
+                SourceStatus(
+                    name=name,
+                    status="failed",
+                    fetched_at=now,
+                    message=f"Agent error: {exc}",
+                ),
+                [],
+            )
+
     async def fetch_from_source(
         self,
         source: dict[str, Any],
@@ -81,7 +194,7 @@ class SourceOrchestrator:
         search_phrase = " ".join(search_terms) if search_terms else query
 
         try:
-            # 1. Search for product listings on this pharmacy's domain
+            # 1. Search for product listings on this pharmacy's domain using TinyFish Search
             domain_query = f"site:{domain} {search_phrase}"
             search_res = await self.client.search(
                 query=domain_query,
@@ -124,7 +237,20 @@ class SourceOrchestrator:
                     [],
                 )
 
-            # 2. Fetch page contents using TinyFish Fetch
+            # 2. Fetch via Agent or Fetch strategy
+            if strategy == "agent":
+                logger.info(f"Using TinyFish Agent for {name} ({target_urls[0]})...")
+                return await self._fetch_with_agent(
+                    source=source,
+                    url=target_urls[0],
+                    resolved=resolved,
+                    query=query,
+                    pincode=pincode,
+                    now=now,
+                    browser_profile="stealth" if source.get("stealth_needed") else "lite",
+                )
+
+            # Standard TinyFish Fetch
             fetch_res = await self.client.fetch(
                 urls=target_urls,
                 format="markdown",
@@ -137,11 +263,11 @@ class SourceOrchestrator:
                 raw_text = item.get("text", "")
                 
                 # Check for delivery timeline indications for the user's pincode
-                delivery_info = f"Deliverable to {pincode}"
+                delivery_info = f"Deliverable to {pincode}" if pincode else "In Stock"
                 if "tomorrow" in raw_text.lower():
-                    delivery_info = f"Fast delivery by tomorrow to {pincode}"
+                    delivery_info = f"Fast delivery by tomorrow to {pincode}" if pincode else "Fast delivery by tomorrow"
                 elif "24-48" in raw_text or "2-3 days" in raw_text.lower():
-                    delivery_info = f"Estimated delivery 2-3 days to {pincode}"
+                    delivery_info = f"Estimated delivery 2-3 days to {pincode}" if pincode else "Estimated delivery 2-3 days"
 
                 raw_pages.append(
                     {
@@ -163,8 +289,16 @@ class SourceOrchestrator:
             if not raw_pages and errors:
                 first_err = errors[0].get("error", "unknown")
                 if "block" in first_err or "bot" in first_err:
-                    status_type = "blocked"
-                    err_msg = f"Bot protection challenge detected: {first_err}"
+                    logger.info(f"Source {name} blocked by bot protection. Falling back to TinyFish Agent (stealth)...")
+                    return await self._fetch_with_agent(
+                        source=source,
+                        url=target_urls[0],
+                        resolved=resolved,
+                        query=query,
+                        pincode=pincode,
+                        now=now,
+                        browser_profile="stealth",
+                    )
                 else:
                     status_type = "failed"
                     err_msg = f"Fetch error: {first_err}"

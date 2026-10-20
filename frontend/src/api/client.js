@@ -181,7 +181,7 @@ export async function searchMedicine({ query, pincode = '', forceMock = false })
   try {
     const controller = new AbortController();
     // 30 seconds timeout to accommodate concurrent TinyFish search/fetch
-    const timeoutId = setTimeout(() => controller.abort(), 30000);
+    const timeoutId = setTimeout(() => controller.abort(), 45000);
 
     const response = await fetch(`${API_BASE_URL}/api/search`, {
       method: 'POST',
