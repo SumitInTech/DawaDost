@@ -2048,3 +2048,52 @@
   background-color: rgba(34, 197, 94, 0.1);
   border-color: var(--color-success-border);
 }
+
+[data-theme="dark"] .example-card-b {
+  background-color: rgba(20, 184, 166, 0.08);
+  border-color: var(--color-border-teal);
+}
+
+[data-theme="dark"] .price-example-explanation {
+  background-color: rgba(19, 78, 74, 0.4);
+  border-color: var(--color-border-teal);
+}
+
+[data-theme="dark"] .explanation-text strong {
+  color: var(--color-dark-teal);
+}
+
+[data-theme="dark"] .explanation-text p {
+  color: var(--color-secondary-text);
+}
+
+[data-theme="dark"] .step-number-badge {
+  color: #FFFFFF;
+}
+
+[data-theme="dark"] .step-icon-wrap {
+  background-color: rgba(20, 184, 166, 0.15);
+  border: 1px solid var(--color-border-teal);
+}
+
+[data-theme="dark"] .btn-primary {
+  color: #FFFFFF;
+}
+
+[data-theme="dark"] .pack-chip {
+  background-color: var(--color-surface-hover);
+}
+
+[data-theme="dark"] .card-price-section {
+  background-color: var(--color-surface-hover);
+}
+
+[data-theme="dark"] .source-tag-cached {
+  background-color: rgba(14, 165, 233, 0.2);
+  color: #38BDF8;
+}
+
+[data-theme="dark"] .source-tag-blocked {
+  background-color: rgba(239, 68, 68, 0.2);
+  color: #F87171;
+}

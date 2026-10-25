@@ -1028,11 +1028,25 @@
   background: radial-gradient(circle at 50% 0%, rgba(20, 184, 166, 0.12) 0%, var(--color-bg) 100%);
 }
 
-[data-theme="dark"] .features-section,
-[data-theme="dark"] .safety-section,
-[data-theme="dark"] .methodology-section,
-[data-theme="dark"] .accuracy-section {
+[data-theme="dark"] .price-unit-section,
+[data-theme="dark"] .hiw-comparable-section,
+[data-theme="dark"] .hiw-transparency-section {
   background-color: #0F172A;
+  border-color: var(--color-border);
+}
+
+[data-theme="dark"] .comparable-caution-box {
+  background-color: rgba(180, 83, 9, 0.2);
+  border-color: #78350F;
+  color: #FDE68A;
+}
+
+[data-theme="dark"] .step-counter {
+  color: #334155;
+}
+
+[data-theme="dark"] .flow-step-highlight {
+  color: #FFFFFF;
 }
 
 [data-theme="dark"] .preview-benchmark-box,
@@ -1045,7 +1059,24 @@
   color: #CBD5E1;
 }
 
+[data-theme="dark"] .final-cta-card {
+  background-color: #042F2E;
+  border: 1px solid var(--color-border-teal);
+}
+
+[data-theme="dark"] .final-cta-card .cta-title {
+  color: #F8FAFC;
+}
+
+[data-theme="dark"] .final-cta-card .cta-subtitle {
+  color: #99F6E4;
+}
+
 [data-theme="dark"] .final-cta-card .btn-primary {
-  background-color: #FFFFFF;
-  color: #0F766E;
+  background-color: var(--color-primary-teal);
+  color: #FFFFFF;
+}
+
+[data-theme="dark"] .final-cta-card .btn-primary:hover {
+  background-color: var(--color-primary-teal-hover);
 }
