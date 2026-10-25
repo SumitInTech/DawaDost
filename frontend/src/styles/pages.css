@@ -860,8 +860,16 @@
     display: none;
   }
 
+  .navbar-mobile-controls {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+
   .navbar-mobile-toggle {
-    display: block;
+    display: flex;
+    align-items: center;
+    justify-content: center;
   }
 
   .navbar-mobile-menu {
@@ -1007,4 +1015,37 @@
     flex-direction: column;
     align-items: stretch;
   }
+}
+
+/* ========================================================
+   DARK THEME PAGE OVERRIDES
+   ======================================================== */
+[data-theme="dark"] .hero-section {
+  background: radial-gradient(circle at 10% 20%, rgba(20, 184, 166, 0.12) 0%, var(--color-bg) 90%);
+}
+
+[data-theme="dark"] .hiw-hero-section {
+  background: radial-gradient(circle at 50% 0%, rgba(20, 184, 166, 0.12) 0%, var(--color-bg) 100%);
+}
+
+[data-theme="dark"] .features-section,
+[data-theme="dark"] .safety-section,
+[data-theme="dark"] .methodology-section,
+[data-theme="dark"] .accuracy-section {
+  background-color: #0F172A;
+}
+
+[data-theme="dark"] .preview-benchmark-box,
+[data-theme="dark"] .detail-guidance-box {
+  background-color: var(--color-surface-hover);
+}
+
+[data-theme="dark"] .preview-badge-benchmark {
+  background-color: #334155;
+  color: #CBD5E1;
+}
+
+[data-theme="dark"] .final-cta-card .btn-primary {
+  background-color: #FFFFFF;
+  color: #0F766E;
 }

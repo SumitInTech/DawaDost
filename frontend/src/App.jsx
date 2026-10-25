@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react';
 import { BrowserRouter, Routes, Route, useLocation } from 'react-router-dom';
+import { ThemeProvider } from './context/ThemeContext.jsx';
 import { SearchProvider } from './context/SearchContext.jsx';
 import Navbar from './components/Navbar.jsx';
 import Footer from './components/Footer.jsx';
@@ -22,23 +23,25 @@ function ScrollToTop() {
 
 export default function App() {
   return (
-    <BrowserRouter>
-      <SearchProvider>
-        <ScrollToTop />
-        <div className="page-wrapper">
-          <Navbar />
-          <main className="main-content" id="main-content">
-            <Routes>
-              <Route path="/" element={<HomePage />} />
-              <Route path="/search" element={<ResultsPage />} />
-              <Route path="/how-it-works" element={<HowItWorksPage />} />
-              {/* Catch-all fallback */}
-              <Route path="*" element={<HomePage />} />
-            </Routes>
-          </main>
-          <Footer />
-        </div>
-      </SearchProvider>
-    </BrowserRouter>
+    <ThemeProvider>
+      <BrowserRouter>
+        <SearchProvider>
+          <ScrollToTop />
+          <div className="page-wrapper">
+            <Navbar />
+            <main className="main-content" id="main-content">
+              <Routes>
+                <Route path="/" element={<HomePage />} />
+                <Route path="/search" element={<ResultsPage />} />
+                <Route path="/how-it-works" element={<HowItWorksPage />} />
+                {/* Catch-all fallback */}
+                <Route path="*" element={<HomePage />} />
+              </Routes>
+            </main>
+            <Footer />
+          </div>
+        </SearchProvider>
+      </BrowserRouter>
+    </ThemeProvider>
   );
 }

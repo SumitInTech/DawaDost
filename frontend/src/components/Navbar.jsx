@@ -1,11 +1,13 @@
 import React, { useState } from 'react';
 import { Link, NavLink, useNavigate, useLocation } from 'react-router-dom';
-import { Pill, Menu, X, ArrowRight } from 'lucide-react';
+import { Pill, Menu, X, ArrowRight, Sun, Moon } from 'lucide-react';
+import { useTheme } from '../context/useTheme.js';
 
 export default function Navbar() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const navigate = useNavigate();
   const location = useLocation();
+  const { theme, toggleTheme } = useTheme();
 
   const handleCompareClick = (e) => {
     e.preventDefault();
@@ -54,6 +56,21 @@ export default function Navbar() {
 
         {/* Desktop Navigation Links */}
         <nav className="navbar-desktop-nav" aria-label="Main Navigation">
+          {/* Dark Mode Toggler placed just before Home */}
+          <button
+            type="button"
+            className="theme-toggle-btn"
+            onClick={toggleTheme}
+            aria-label={theme === 'dark' ? 'Switch to light mode' : 'Switch to dark mode'}
+            title={theme === 'dark' ? 'Switch to light mode' : 'Switch to dark mode'}
+          >
+            {theme === 'dark' ? (
+              <Sun size={19} className="theme-toggle-icon theme-toggle-sun" aria-hidden="true" />
+            ) : (
+              <Moon size={19} className="theme-toggle-icon theme-toggle-moon" aria-hidden="true" />
+            )}
+          </button>
+
           <NavLink
             to="/"
             end
@@ -87,16 +104,32 @@ export default function Navbar() {
           </button>
         </nav>
 
-        {/* Mobile Menu Toggle Button */}
-        <button
-          type="button"
-          className="navbar-mobile-toggle"
-          aria-expanded={mobileMenuOpen}
-          aria-label={mobileMenuOpen ? 'Close navigation menu' : 'Open navigation menu'}
-          onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-        >
-          {mobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
-        </button>
+        {/* Mobile Header Controls */}
+        <div className="navbar-mobile-controls">
+          <button
+            type="button"
+            className="theme-toggle-btn theme-toggle-btn-mobile-header"
+            onClick={toggleTheme}
+            aria-label={theme === 'dark' ? 'Switch to light mode' : 'Switch to dark mode'}
+            title={theme === 'dark' ? 'Switch to light mode' : 'Switch to dark mode'}
+          >
+            {theme === 'dark' ? (
+              <Sun size={20} className="theme-toggle-sun" aria-hidden="true" />
+            ) : (
+              <Moon size={20} className="theme-toggle-moon" aria-hidden="true" />
+            )}
+          </button>
+
+          <button
+            type="button"
+            className="navbar-mobile-toggle"
+            aria-expanded={mobileMenuOpen}
+            aria-label={mobileMenuOpen ? 'Close navigation menu' : 'Open navigation menu'}
+            onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+          >
+            {mobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
+          </button>
+        </div>
       </div>
 
       {/* Mobile Collapsible Navigation Menu */}
