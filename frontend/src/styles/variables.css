@@ -57,3 +57,49 @@
   --transition-fast: 150ms ease;
   --transition-normal: 220ms ease;
 }
+
+[data-theme="dark"] {
+  /* Brand Teal Palette - tuned for high legibility on dark surfaces */
+  --color-primary-teal: #14B8A6;
+  --color-primary-teal-hover: #2DD4BF;
+  --color-dark-teal: #5EEAD4;
+  --color-light-teal: #134E4A;
+  --color-teal-50: #042F2E;
+  --color-teal-100: #115E59;
+  --color-teal-200: #14B8A6;
+
+  /* Surfaces & Backgrounds */
+  --color-bg: #0B1120;
+  --color-white: #1E293B;
+  --color-surface-hover: #273549;
+  --color-surface-muted: #1A2436;
+
+  /* Typography */
+  --color-main-text: #F8FAFC;
+  --color-secondary-text: #94A3B8;
+  --color-muted-text: #64748B;
+
+  /* Borders & Dividers */
+  --color-border: #334155;
+  --color-border-hover: #475569;
+  --color-border-teal: #0D9488;
+
+  /* Status Colors */
+  --color-success: #4ADE80;
+  --color-success-bg: rgba(22, 101, 52, 0.3);
+  --color-success-border: #166534;
+
+  --color-warning: #FBBF24;
+  --color-warning-bg: rgba(180, 83, 9, 0.3);
+  --color-warning-border: #78350F;
+
+  --color-error: #F87171;
+  --color-error-bg: rgba(185, 28, 28, 0.3);
+  --color-error-border: #7F1D1D;
+
+  /* Shadows for dark elevation */
+  --shadow-xs: 0 1px 2px rgba(0, 0, 0, 0.4);
+  --shadow-sm: 0 2px 4px rgba(0, 0, 0, 0.4), 0 1px 2px rgba(0, 0, 0, 0.3);
+  --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.5), 0 2px 4px rgba(0, 0, 0, 0.35);
+  --shadow-lg: 0 10px 25px -5px rgba(0, 0, 0, 0.65), 0 8px 10px -6px rgba(0, 0, 0, 0.45);
+}
